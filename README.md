@@ -3,11 +3,11 @@ This project is an authentic, fan-made recreation of the classic 2005 Xbox 360 B
 
 <div align="center">
 
-  <img src="" width="48%" alt="Home Screen">
-  <img src="" width="48%" alt="Game Library">
+  <img src="home.png" width="48%" alt="Home page">
+  <img src="Games.png" width="48%" alt="Game page">
   <br/>
-  <img src="" width="48%" alt="Guide">
-  <img src="" width="48%" alt="Settings Menu">
+  <img src="guide.png" width="48%" alt="Guide">
+  <img src="Settings.png" width="48%" alt="Settings Menu">
 </div>
 
 <br/>
