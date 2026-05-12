@@ -1,5 +1,5 @@
 # Blades-2005 Theme for Xenia Dashboard
-This project is an authentic, fan-made recreation of the classic 2005 Xbox 360 Blades interface, reimagined in a striking black-and-white color palette. Please note that this is an external theme extension specifically designed for the Xenia Dashboard program. It aims to completely transform your existing dashboard into the golden era of console interfaces.
+This project is an authentic, fan-made recreation of the classic 2005 Xbox 360 Blades interface, reimagined in a striking Gray-and-white color palette. Please note that this is an external theme extension specifically designed for the Xenia Dashboard program. It aims to completely transform your existing dashboard into the golden era of console interfaces.
 
 <div align="center">
 
