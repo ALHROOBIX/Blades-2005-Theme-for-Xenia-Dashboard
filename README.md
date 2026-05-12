@@ -59,7 +59,7 @@ This project is an authentic, fan-made recreation of the classic 2005 Xbox 360 B
 
 | Technologies | التقنيات |
 | :--- | ---: |
-| - **[Electron](https://www.electronjs.org/):** Desktop framework.<br>- **[Node.js](https://nodejs.org/):** Backend environment.<br>- **[Alpine.js](https://alpinejs.dev/):** Lightweight UI reactivity.<br>- **HTML5 & CSS3:** For the pixel-perfect black-and-white Blades UI styling. | <div dir="rtl">- **Electron:** إطار عمل سطح المكتب.<br>- **Node.js:** بيئة عمل الخلفية (Backend).<br>- **Alpine.js:** للتعامل مع الواجهة التفاعلية بخفة.<br>- **HTML5 & CSS3:** لتصميم واجهة Blades UI باللونين الأبيض والأسود بدقة عالية.</div> |
+| - **[Electron](https://www.electronjs.org/):** Desktop framework.<br>- **[Node.js](https://nodejs.org/):** Backend environment.<br>- **[Alpine.js](https://alpinejs.dev/):** Lightweight UI reactivity.<br>- **HTML5 & CSS3:** For the pixel-perfect Gray-and-white Blades UI styling. | <div dir="rtl">- **Electron:** إطار عمل سطح المكتب.<br>- **Node.js:** بيئة عمل الخلفية (Backend).<br>- **Alpine.js:** للتعامل مع الواجهة التفاعلية بخفة.<br>- **HTML5 & CSS3:** لتصميم واجهة Blades UI باللونين الأبيض و رصاصي بدقة عالية.</div> |
 
 <br/>
 
