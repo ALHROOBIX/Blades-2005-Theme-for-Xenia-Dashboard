@@ -1,0 +1,94 @@
+<section class="page" id="patches-manager" x-data x-cloak>
+    <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/Settings.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+    <div class="global-glass-bg" style="z-index:-1;"></div>
+    <div class="classic-settings-box">
+        <div class="classic-settings-header" x-text="($store.app.focusedGamePatchInfo?.fileName.split(' - ')[1] || $store.app.t('patches.title')).replace('.patch.toml', '') + ' PATCHES'"></div>
+        
+        <div class="classic-settings-body">
+            
+            <nav class="gray-menu config-editor-menu" x-effect="$store.app.focusedIndex; $nextTick(() => { let f = $el.querySelector('.focused'); if(f) f.scrollIntoView({block: 'center', behavior: 'smooth'}) })">
+                
+                <template x-if="!$store.app.patchesLoadingError && $store.app.patchList.length === 0">
+                     <div class="gray-menu-item"><span x-text="$store.app.t('generic.loading')">Loading...</span></div>
+                </template>
+                
+                <template x-for="(patch, index) in $store.app.patchList" :key="patch.id">
+                    <div class="gray-menu-item" :class="{'focused': $store.app.focusedIndex === index && $store.app.configFocusedPanel === 'categories'}" @click="$store.app.focusedIndex = index">
+                        <div class="patch-status-indicator" :class="{'enabled': patch.is_enabled}"></div>
+                        <span x-text="patch.name"></span>
+                    </div>
+                </template>
+            </nav>
+            
+            <div class="gray-content config-editor-options">
+                <template x-if="$store.app.patchList.length > 0 && $store.app.patchList[$store.app.focusedIndex]">
+                    <div>
+                        <h3 x-text="$store.app.patchList[$store.app.focusedIndex].name" class="patch-name-title"></h3>
+                        <p x-text="$store.app.patchList[$store.app.focusedIndex].desc" class="patch-desc-text"></p>
+                        
+                        <div class="patch-toggle-wrapper">
+                            <label class="nxe-toggle-switch">
+                                <input type="checkbox" :checked="$store.app.patchList[$store.app.focusedIndex].is_enabled" @click="$store.actions.togglePatch($store.app.patchList[$store.app.focusedIndex])">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="patch-status-text" x-text="$store.app.patchList[$store.app.focusedIndex].is_enabled ? ($store.app.t('patches.enabled') || 'Enabled') : ($store.app.t('patches.disabled') || 'Disabled')"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div> 
+
+    
+    
+    <footer class="nxe-footer-left">
+        <div class="footer-button" id="btn-a"><span class="button-icon a">A</span> <span x-text="$store.app.t('generic.toggle')">Toggle</span></div>
+        <div class="footer-button" id="btn-b" @click.prevent="$store.actions.goBack()"><span class="button-icon b">B</span> <span x-text="$store.app.t('generic.back')">Back</span></div>
+        <div class="footer-button" id="btn-x" @click.prevent="$store.actions.saveAllPatches()">
+            <span class="button-icon x">X</span> 
+            <span x-show="$store.app.patchSaveStatus === 'idle'" x-text="$store.app.t('generic.save')">Save</span>
+            <span x-show="$store.app.patchSaveStatus === 'saving'" x-text="$store.app.t('generic.saving')">Saving...</span>
+            <span x-show="$store.app.patchSaveStatus === 'saved'" x-text="$store.app.t('generic.saved')">Saved!</span>
+            <span x-show="$store.app.patchSaveStatus === 'error'" x-text="$store.app.t('generic.error')">Error!</span>
+    </div>
+    </footer>
+
+<style>
+
+html[dir="rtl"] #patches-manager {
+    direction: ltr !important;
+}
+
+
+html[dir="rtl"] #patches-manager .nxe-settings-container {
+    flex-direction: row !important;
+}
+
+
+html[dir="rtl"] #patches-manager .nxe-footer-left {
+    left: 50px !important;
+    right: auto !important;
+    flex-direction: row !important;
+}
+
+
+html[dir="rtl"] #patches-manager .nxe-settings-item {
+    text-align: left !important;
+    flex-direction: row !important;
+}
+
+
+html[dir="rtl"] #patches-manager .nxe-settings-description {
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+
+html[dir="rtl"] #patches-manager .nxe-toggle-switch input:checked + .slider:before {
+    transform: translateX(24px) !important;
+}
+html[dir="rtl"] #patches-manager .nxe-toggle-switch .slider:before {
+    transform: translateX(0) !important;
+}
+</style>
+</section>

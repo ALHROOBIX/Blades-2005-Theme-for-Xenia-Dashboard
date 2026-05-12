@@ -1,0 +1,109 @@
+<section class="page" id="settings-config" x-data x-init="if($store.app.configMode !== 'game') await $store.actions.loadXeniaConfig()" x-cloak>
+    <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/Settings.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+    <div class="global-glass-bg" style="z-index:-1;"></div>
+    <div class="classic-settings-box">
+        <div class="classic-settings-header">
+            <template x-if="$store.app.configMode !== 'game'"><span>Xenia Config</span></template>
+            <template x-if="$store.app.configMode === 'game'"><span x-text="$store.app.editingGameInfo ? $store.app.editingGameInfo.name + ' CONFIG' : 'GAME CONFIG'"></span></template>
+        </div>
+        
+        <div class="classic-settings-body">
+            <nav class="gray-menu config-editor-menu" :class="{'config-panel-unfocused': $store.app.configFocusedPanel === 'options'}" x-effect="$store.app.focusedConfigCategoryIndex; $nextTick(() => { let f = $el.querySelector('.focused'); if(f) f.scrollIntoView({block: 'center', behavior: 'smooth'}) })">
+                <template x-for="(category, index) in $store.app.configCategories" :key="category">
+                    <div class="gray-menu-item" :class="{'focused': $store.app.focusedConfigCategoryIndex === index}" @click="$store.app.focusedConfigCategoryIndex = index; $store.app.configFocusedPanel = 'categories'">
+                        <span x-text="category"></span>
+                    </div>
+                </template>
+            </nav>
+            
+            <div class="gray-content config-editor-options" x-effect="$store.app.configOptionIndex; $nextTick(() => { let f = $el.querySelector('.focused'); if(f) f.scrollIntoView({block: 'center', behavior: 'smooth'}) })">
+                <template x-if="!$store.app.xeniaConfigError && $store.app.configCategories.length > 0">
+                    <div class="config-options-wrapper" :key="$store.app.focusedConfigCategoryIndex">
+                        <h3 class="config-category-title" x-text="$store.app.configCategories[$store.app.focusedConfigCategoryIndex]"></h3>
+                        
+                        <template x-for="(option, index) in $store.app.currentConfigOptions" :key="option.key">
+                            <div class="config-option" :class="{'focused': $store.app.configOptionIndex === index && $store.app.configFocusedPanel === 'options'}">
+                                <label x-text="option.key" class="config-option-label"></label>
+                                
+                                <div class="config-input-wrapper">
+                                    <template x-if="option.type === 'boolean'">
+                                        <label class="nxe-toggle-switch">
+                                            <input type="checkbox" :checked="$store.app.xeniaConfig?.[$store.app.configCategories?.[$store.app.focusedConfigCategoryIndex]]?.[option.key]" @change="$store.app.xeniaConfig[$store.app.configCategories[$store.app.focusedConfigCategoryIndex]][option.key] = !$store.app.xeniaConfig?.[$store.app.configCategories?.[$store.app.focusedConfigCategoryIndex]]?.[option.key]">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </template>
+
+                                    <template x-if="option.type === 'string'">
+                                        <input type="text" class="nxe-config-input"
+                                            :id="$store.app.configCategories[$store.app.focusedConfigCategoryIndex] + '_' + option.key"
+                                            x-model="$store.app.xeniaConfig[$store.app.configCategories[$store.app.focusedConfigCategoryIndex]][option.key]">
+                                    </template>
+
+                                    <template x-if="option.type === 'number'">
+                                        <input type="number" class="nxe-config-input"
+                                            :id="$store.app.configCategories[$store.app.focusedConfigCategoryIndex] + '_' + option.key"
+                                            x-model.number="$store.app.xeniaConfig[$store.app.configCategories[$store.app.focusedConfigCategoryIndex]][option.key]">
+                                    </template>
+                                </div>
+
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <footer class="nxe-footer-left">
+        <div class="footer-button" id="btn-a" @click.prevent="($store.app.configFocusedPanel === 'options') ? $store.actions.selectConfigOption() : ($store.app.configFocusedPanel = 'options', $store.actions.playSound('focus'))"><span class="button-icon a">A</span> <span x-text="$store.app.t('generic.select')">Select</span></div>
+        <div class="footer-button" id="btn-b" @click.prevent="($store.app.configFocusedPanel === 'options') ? ($store.app.configFocusedPanel = 'categories', $store.actions.playSound('back')) : $store.actions.goBack()"><span class="button-icon b">B</span> <span x-text="$store.app.t('generic.back')">Back</span></div>
+        <div class="footer-button" id="btn-x" @click.prevent="$store.actions.saveXeniaConfig()">
+            <span class="button-icon x">X</span> 
+            
+            <span 
+                x-text="
+                    $store.app.configSaveStatus === 'saved' ? $store.app.t('generic.saved') :
+                    ($store.app.configSaveStatus === 'saving' ? $store.app.t('generic.saving') : $store.app.t('generic.save'))
+                "
+            >Save</span>
+        </div>
+    </footer>
+        <style>
+        
+        html[dir="rtl"] #settings-config {
+            direction: ltr !important;
+        }
+
+        
+        html[dir="rtl"] #settings-config .nxe-settings-container {
+            flex-direction: row !important;
+        }
+
+        
+        html[dir="rtl"] #settings-config .nxe-footer-left {
+            left: 50px !important;
+            right: auto !important;
+            flex-direction: row !important;
+        }
+
+        
+        html[dir="rtl"] #settings-config .config-option {
+            flex-direction: row !important;
+            text-align: left !important;
+        }
+
+        
+        html[dir="rtl"] #settings-config .nxe-settings-menu {
+            text-align: left !important;
+        }
+        
+        html[dir="rtl"] #settings-config .nxe-toggle-switch input:checked + .slider:before {
+            transform: translateX(24px) !important;
+        }
+
+        
+        html[dir="rtl"] #settings-config .nxe-toggle-switch .slider:before {
+            transform: translateX(0) !important;
+        }
+    </style>
+</section>

@@ -1,0 +1,602 @@
+{
+  "en": {
+    "dashboard_menu": {
+      "home": "HOME",
+      "achievements": "ACHIEVEMENTS",
+      "games": "GAMES",
+      "settings": "SETTINGS",
+      "about": "ABOUT",
+      "opentray": "Open Tray",
+      "gamelibrary": "Game Library",
+      "change_bg": "Change Background",
+      "reset_bg": "Reset Background",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "settings": {
+      "Settings-Core_title": "Settings Core",
+      "Settings-Color_title": "Interface Color",
+      "Settings-Theme_title": "Themes Settings",
+      "Settings-Wellpaper_title": "Wallpaper Settings",
+      "Settings-Sound_title": "Sound Settings",
+      "Settings-Language_title": "Language"
+    },
+    "guide": {
+      "home": "HOME",
+      "settings": "SETTINGS",
+      "games": "GAMES"
+    },
+    "library":{
+      "search_game": "Search for a game..."
+    },
+    "about": {
+      "theme_title": "Xbox 360 Blades Dashboard (2005)",
+      "theme_desc": "Experience the pure nostalgia of the original Xbox 360 interface. This meticulously crafted theme revives the iconic swoosh sounds, the classic white and gray aesthetics, and the unforgettable blade transitions that defined a generation of gaming.",
+      "ui_version": "UI Version:",
+      "system": "System:",
+      "about": "About"
+    },
+    "display": {
+      "title": "Wallpaper Settings",
+      "home_wallpaper": "Home Wallpaper",
+      "games_wallpaper": "Games Wallpaper",
+      "settings_wallpaper": "Settings Wallpaper",
+      "about_wallpaper": "About Wallpaper",
+      "wall_bg_desc": "Select a custom image (JPG, PNG) to replace the default background.",
+      "current": "Current Selection"
+    },
+    "profile": {
+      "blade_title": "PROFILES"
+    }
+  },
+  "ar": {
+    "dashboard_menu": {
+      "home": "الرئيسية",
+      "achievements": "الإنجازات",
+      "games": "الألعاب",
+      "settings": "الإعدادات",
+      "about": "حول",
+      "opentray": "فتح الدرج",
+      "gamelibrary": "مكتبة الألعاب",
+      "change_bg": "تغيير الخلفية",
+      "reset_bg": "إعادة تعيين الخلفية",
+      "online": "متصل",
+      "offline": "غير متصل"
+    },
+    "settings": {
+      "Settings-Core_title": "الإعدادات الأساسية",
+      "Settings-Color_title": "ألوان الواجهة",
+      "Settings-Theme_title": "إعدادات الثيمات",
+      "Settings-Wellpaper_title": "إعدادات الخلفية",
+      "Settings-Sound_title": "إعدادات الصوت",
+      "Settings-Language_title": "اللغة"
+    },
+    "guide": {
+      "home": "الرئيسية",
+      "settings": "الإعدادات",
+      "games": "الألعاب"
+    },
+    "library": {
+      "search_game": "ابحث عن لعبة..."
+    },
+    "about": {
+      "theme_title": "واجهة إكس بوكس 360 (إصدار 2005)",
+      "theme_desc": "استرجع الحنين إلى الماضي مع الواجهة الكلاسيكية الأصلية لجهاز Xbox 360. تم تصميم هذا الثيم بعناية فائقة ليحاكي أدق التفاصيل، بدءاً من تأثيرات الانتقال الشهيرة (Swoosh)، والأصوات الكلاسيكية، وصولاً إلى ألوان الأبيض والرصاصي الأنيقة التي شكلت جيلاً كاملاً من اللاعبين.",
+      "ui_version": "الإصدار:",
+      "system": "النظام:",
+      "about": "حول"
+    },
+    "display": {
+      "title": "إعدادات الخلفية",
+      "home_wallpaper": "خلفية الرئيسية",
+      "games_wallpaper": "خلفية الألعاب",
+      "settings_wallpaper": "خلفية الإعدادات",
+      "about_wallpaper": "خلفية حول",
+      "wall_bg_desc": "اختر صورة مخصصة (JPG, PNG) لاستبدال الخلفية الافتراضية.",
+      "current": "الاختيار الحالي"
+    },
+    "profile": {
+      "blade_title": "الحسابات"
+    }
+  },
+  "zh": {
+    "dashboard_menu": {
+      "home": "主页",
+      "achievements": "成就",
+      "games": "游戏",
+      "settings": "设置",
+      "about": "关于",
+      "opentray": "打开托盘",
+      "gamelibrary": "游戏库",
+      "change_bg": "更改背景",
+      "reset_bg": "重置背景",
+      "online": "在线",
+      "offline": "离线"
+    },
+    "settings": {
+      "Settings-Core_title": "核心设置",
+      "Settings-Color_title": "界面颜色",
+      "Settings-Theme_title": "主题设置",
+      "Settings-Wellpaper_title": "壁纸设置",
+      "Settings-Sound_title": "声音设置",
+      "Settings-Language_title": "语言"
+    },
+    "guide": {
+      "home": "主页",
+      "settings": "设置",
+      "games": "游戏"
+    },
+    "library": {
+      "search_game": "搜索游戏..."
+    },
+    "about": {
+      "theme_title": "Xbox 360 Blades 仪表板 (2005)",
+      "theme_desc": "体验原版 Xbox 360 界面的纯粹怀旧之情。这个精心制作的主题再现了标志性的 swoosh 声音、经典的灰白美学，以及定义了一代游戏的令人难忘的刀片式过渡效果。",
+      "ui_version": "界面版本：",
+      "system": "系统：",
+      "about": "关于"
+    },
+    "display": {
+      "title": "壁纸设置",
+      "home_wallpaper": "主页壁纸",
+      "games_wallpaper": "游戏壁纸",
+      "settings_wallpaper": "设置壁纸",
+      "about_wallpaper": "关于壁纸",
+      "wall_bg_desc": "选择自定义图像 (JPG, PNG) 以替换默认背景。",
+      "current": "当前选择"
+    } ,
+    "profile": {
+      "blade_title": "个人资料"
+    }
+  },
+  "ja": {
+    "dashboard_menu": {
+      "home": "ホーム",
+      "achievements": "実績",
+      "games": "ゲーム",
+      "settings": "設定",
+      "about": "概要",
+      "opentray": "トレイを開く",
+      "gamelibrary": "ゲームライブラリ",
+      "change_bg": "背景を変更",
+      "reset_bg": "背景をリセット",
+      "online": "オンライン",
+      "offline": "オフライン"
+    },
+    "settings": {
+      "Settings-Core_title": "コア設定",
+      "Settings-Color_title": "インターフェースの色",
+      "Settings-Theme_title": "テーマ設定",
+      "Settings-Wellpaper_title": "壁紙設定",
+      "Settings-Sound_title": "サウンド設定",
+      "Settings-Language_title": "言語"
+    },
+    "guide": {
+      "home": "ホーム",
+      "settings": "設定",
+      "games": "ゲーム"
+    },
+    "library": {
+      "search_game": "ゲームを検索..."
+    },
+    "about": {
+      "theme_title": "Xbox 360 Blades ダッシュボード (2005)",
+      "theme_desc": "初代 Xbox 360 インターフェースの純粋なノスタルジーを体験してください。この細部までこだわって作られたテーマは、象徴的なスウッシュ音、クラシックな白とグレーの美しさ、そしてゲームの一時代を築いた忘れられないブレードの遷移を蘇らせます。",
+      "ui_version": "UIバージョン：",
+      "system": "システム：",
+      "about": "概要"
+    },
+    "display": {
+      "title": "壁紙設定",
+      "home_wallpaper": "ホームの壁紙",
+      "games_wallpaper": "ゲームの壁紙",
+      "settings_wallpaper": "設定の壁紙",
+      "about_wallpaper": "概要の壁紙",
+      "wall_bg_desc": "デフォルトの背景を置き換えるカスタム画像（JPG、PNG）を選択します。",
+      "current": "現在の選択"
+    },
+    "profile": {
+      "blade_title": "プロフィール"
+    }
+  },
+  "ko": {
+    "dashboard_menu": {
+      "home": "홈",
+      "achievements": "도전 과제",
+      "games": "게임",
+      "settings": "설정",
+      "about": "정보",
+      "opentray": "트레이 열기",
+      "gamelibrary": "게임 라이브러리",
+      "change_bg": "배경 변경",
+      "reset_bg": "배경 리셋",
+      "online": "온라인",
+      "offline": "오프라인"
+    },
+    "settings": {
+      "Settings-Core_title": "핵심 설정",
+      "Settings-Color_title": "인터페이스 색상",
+      "Settings-Theme_title": "테마 설정",
+      "Settings-Wellpaper_title": "배경화면 설정",
+      "Settings-Sound_title": "사운드 설정",
+      "Settings-Language_title": "언어"
+    },
+    "guide": {
+      "home": "홈",
+      "settings": "설정",
+      "games": "게임"
+    },
+    "library": {
+      "search_game": "게임 검색..."
+    },
+    "about": {
+      "theme_title": "Xbox 360 Blades 대시보드 (2005)",
+      "theme_desc": "오리지널 Xbox 360 인터페이스의 순수한 향수를 경험해 보세요. 세심하게 제작된 이 테마는 상징적인 스우시 사운드, 클래식한 흰색과 회색의 미학, 한 세대의 게임을 정의했던 잊을 수 없는 블레이드 전환을 되살립니다.",
+      "ui_version": "UI 버전:",
+      "system": "시스템:",
+      "about": "정보"
+    },
+    "display": {
+      "title": "배경화면 설정",
+      "home_wallpaper": "홈 배경화면",
+      "games_wallpaper": "게임 배경화면",
+      "settings_wallpaper": "설정 배경화면",
+      "about_wallpaper": "정보 배경화면",
+      "wall_bg_desc": "기본 배경을 사용자 지정 이미지(JPG, PNG)로 교체합니다.",
+      "current": "현재 선택"
+    },
+    "profile": {
+      "blade_title": "프로필"
+    }
+  },
+  "ru": {
+    "dashboard_menu": {
+      "home": "ГЛАВНАЯ",
+      "achievements": "ДОСТИЖЕНИЯ",
+      "games": "ИГРЫ",
+      "settings": "НАСТРОЙКИ",
+      "about": "О ПРОГРАММЕ",
+      "opentray": "Открыть лоток",
+      "gamelibrary": "Библиотека игр",
+      "change_bg": "Изменить фон",
+      "reset_bg": "Сбросить фон",
+      "online": "В сети",
+      "offline": "Не в сети"
+    },
+    "settings": {
+      "Settings-Core_title": "Основные настройки",
+      "Settings-Color_title": "Цвет интерфейса",
+      "Settings-Theme_title": "Настройки тем",
+      "Settings-Wellpaper_title": "Настройки обоев",
+      "Settings-Sound_title": "Настройки звука",
+      "Settings-Language_title": "Язык"
+    },
+    "guide": {
+      "home": "ГЛАВНАЯ",
+      "settings": "НАСТРОЙКИ",
+      "games": "ИГРЫ"
+    },
+    "library": {
+      "search_game": "Поиск игры..."
+    },
+    "about": {
+      "theme_title": "Панель Xbox 360 Blades (2005)",
+      "theme_desc": "Испытайте чистую ностальгию по оригинальному интерфейсу Xbox 360. Эта тщательно проработанная тема возрождает культовые звуки swoosh, классическую бело-серую эстетику и незабываемые переходы-лезвия, определившие целое поколение игр.",
+      "ui_version": "Версия UI:",
+      "system": "Система:",
+      "about": "О ПРОГРАММЕ"
+    },
+    "display": {
+      "title": "Настройки обоев",
+      "home_wallpaper": "Обои главной страницы",
+      "games_wallpaper": "Обои игр",
+      "settings_wallpaper": "Обои настроек",
+      "about_wallpaper": "Обои 'О программе'",
+      "wall_bg_desc": "Выберите пользовательское изображение (JPG, PNG) для замены стандартного фона.",
+      "current": "Текущий выбор"
+    },
+    "profile": {
+      "blade_title": "Профиль"
+    }
+  },
+  "de": {
+    "dashboard_menu": {
+      "home": "START",
+      "achievements": "ERFOLGE",
+      "games": "SPIELE",
+      "settings": "EINSTELLUNGEN",
+      "about": "ÜBER",
+      "opentray": "Laufwerk öffnen",
+      "gamelibrary": "Spielebibliothek",
+      "change_bg": "Hintergrund ändern",
+      "reset_bg": "Hintergrund zurücksetzen",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "settings": {
+      "Settings-Core_title": "Kerneinstellungen",
+      "Settings-Color_title": "Schnittstellenfarbe",
+      "Settings-Theme_title": "Themen-Einstellungen",
+      "Settings-Wellpaper_title": "Hintergrund-Einstellungen",
+      "Settings-Sound_title": "Toneinstellungen",
+      "Settings-Language_title": "Sprache"
+    },
+    "guide": {
+      "home": "START",
+      "settings": "EINSTELLUNGEN",
+      "games": "SPIELE"
+    },
+    "library": {
+      "search_game": "Suche nach Spielen..."
+    },
+    "about": {
+      "theme_title": "Xbox 360 Blades Dashboard (2005)",
+      "theme_desc": "Erleben Sie die pure Nostalgie der ursprünglichen Xbox 360-Oberfläche. Dieses sorgfältig ausgearbeitete Theme lässt die ikonischen Swoosh-Sounds, die klassische weiß-graue Ästhetik und die unvergesslichen Blade-Übergänge wieder aufleben, die eine Gaming-Generation geprägt haben.",
+      "ui_version": "UI-Version:",
+      "system": "System:",
+      "about": "ÜBER"
+    },
+    "display": {
+      "title": "Hintergrund-Einstellungen",
+      "home_wallpaper": "Start-Hintergrund",
+      "games_wallpaper": "Spiele-Hintergrund",
+      "settings_wallpaper": "Einstellungen-Hintergrund",
+      "about_wallpaper": "Über-Hintergrund",
+      "wall_bg_desc": "Wählen Sie ein benutzerdefiniertes Bild (JPG, PNG), um den Standardhintergrund zu ersetzen.",
+      "current": "Aktuelle Auswahl"
+    },
+    "profile": {
+      "blade_title": "Profil"
+    }
+  },
+  "pt_BR": {
+    "dashboard_menu": {
+      "home": "INÍCIO",
+      "achievements": "CONQUISTAS",
+      "games": "JOGOS",
+      "settings": "CONFIGURAÇÕES",
+      "about": "SOBRE",
+      "opentray": "Abrir Bandeja",
+      "gamelibrary": "Biblioteca de Jogos",
+      "change_bg": "Alterar Plano de Fundo",
+      "reset_bg": "Redefinir Plano de Fundo",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "settings": {
+      "Settings-Core_title": "Configurações Principais",
+      "Settings-Color_title": "Cor da Interface",
+      "Settings-Theme_title": "Configurações de Tema",
+      "Settings-Wellpaper_title": "Configurações de Papel de Parede",
+      "Settings-Sound_title": "Configurações de Som",
+      "Settings-Language_title": "Idioma"
+    },
+    "guide": {
+      "home": "INÍCIO",
+      "settings": "CONFIGURAÇÕES",
+      "games": "JOGOS"
+    },
+    "library": {
+      "search_game": "Pesquisar jogo..."
+    },
+    "about": {
+      "theme_title": "Painel Xbox 360 Blades (2005)",
+      "theme_desc": "Experimente a pura nostalgia da interface original do Xbox 360. Este tema meticulosamente elaborado revive os icônicos sons de swoosh, a estética clássica em branco e cinza e as inesquecíveis transições de lâmina que definiram uma geração de jogos.",
+      "ui_version": "Versão da UI:",
+      "system": "Sistema:",
+      "about": "SOBRE"
+    },
+    "display": {
+      "title": "Configurações de Papel de Parede",
+      "home_wallpaper": "Papel de Parede do Início",
+      "games_wallpaper": "Papel de Parede de Jogos",
+      "settings_wallpaper": "Papel de Parede de Configurações",
+      "about_wallpaper": "Papel de Parede de Sobre",
+      "wall_bg_desc": "Selecione uma imagem personalizada (JPG, PNG) para substituir o fundo padrão.",
+      "current": "Seleção Atual"
+    },
+    "profile": {
+      "blade_title": "Perfil"
+    }
+  },
+  "es": {
+    "dashboard_menu": {
+      "home": "INICIO",
+      "achievements": "LOGROS",
+      "games": "JUEGOS",
+      "settings": "CONFIGURACIÓN",
+      "about": "ACERCA DE",
+      "opentray": "Abrir Bandeja",
+      "gamelibrary": "Biblioteca de Juegos",
+      "change_bg": "Cambiar Fondo",
+      "reset_bg": "Restablecer Fondo",
+      "online": "En línea",
+      "offline": "Desconectado"
+    },
+    "settings": {
+      "Settings-Core_title": "Configuración Principal",
+      "Settings-Color_title": "Color de la Interfaz",
+      "Settings-Theme_title": "Configuración de Temas",
+      "Settings-Wellpaper_title": "Configuración de Fondo",
+      "Settings-Sound_title": "Configuración de Sonido",
+      "Settings-Language_title": "Idioma"
+    },
+    "guide": {
+      "home": "INICIO",
+      "settings": "CONFIGURACIÓN",
+      "games": "JUEGOS"
+    },
+    "library": {
+      "search_game": "Buscar juego..."
+    },
+    "about": {
+      "theme_title": "Panel de Xbox 360 Blades (2005)",
+      "theme_desc": "Experimenta la pura nostalgia de la interfaz original de Xbox 360. Este tema meticulosamente elaborado revive los icónicos sonidos de swoosh, la estética clásica en blanco y gris, y las inolvidables transiciones de cuchilla que definieron a una generación de jugadores.",
+      "ui_version": "Versión de UI:",
+      "system": "Sistema:",
+      "about": "ACERCA DE"
+    },
+    "display": {
+      "title": "Configuración de Fondo",
+      "home_wallpaper": "Fondo de Inicio",
+      "games_wallpaper": "Fondo de Juegos",
+      "settings_wallpaper": "Fondo de Configuración",
+      "about_wallpaper": "Fondo de Acerca de",
+      "wall_bg_desc": "Selecciona una imagen personalizada (JPG, PNG) para reemplazar el fondo predeterminado.",
+      "current": "Selección Actual"
+    },
+    "profile": {
+      "blade_title": "Perfil"
+    }
+  },
+  "tr": {
+    "dashboard_menu": {
+      "home": "ANA SAYFA",
+      "achievements": "BAŞARILAR",
+      "games": "OYUNLAR",
+      "settings": "AYARLAR",
+      "about": "HAKKINDA",
+      "opentray": "Tepsiyi Aç",
+      "gamelibrary": "Oyun Kütüphanesi",
+      "change_bg": "Arka Planı Değiştir",
+      "reset_bg": "Arka Planı Sıfırla",
+      "online": "Çevrimiçi",
+      "offline": "Çevrimdışı"
+    },
+    "settings": {
+      "Settings-Core_title": "Temel Ayarlar",
+      "Settings-Color_title": "Arayüz Rengi",
+      "Settings-Theme_title": "Tema Ayarları",
+      "Settings-Wellpaper_title": "Duvar Kağıdı Ayarları",
+      "Settings-Sound_title": "Ses Ayarları",
+      "Settings-Language_title": "Dil"
+    },
+    "guide": {
+      "home": "ANA SAYFA",
+      "settings": "AYARLAR",
+      "games": "OYUNLAR"
+    },
+    "library": {
+      "search_game": "Oyun Ara..."
+    },
+    "about": {
+      "theme_title": "Xbox 360 Blades Panosu (2005)",
+      "theme_desc": "Orijinal Xbox 360 arayüzünün saf nostaljisini yaşayın. Özenle hazırlanmış bu tema, ikonik swoosh seslerini, klasik beyaz ve gri estetiği ve bir oyun neslini tanımlayan unutulmaz bıçak geçişlerini canlandırıyor.",
+      "ui_version": "Arayüz Sürümü:",
+      "system": "Sistem:",
+      "about": "HAKKINDA"
+    },
+    "display": {
+      "title": "Duvar Kağıdı Ayarları",
+      "home_wallpaper": "Ana Sayfa Duvar Kağıdı",
+      "games_wallpaper": "Oyunlar Duvar Kağıdı",
+      "settings_wallpaper": "Ayarlar Duvar Kağıdı",
+      "about_wallpaper": "Hakkında Duvar Kağıdı",
+      "wall_bg_desc": "Varsayılan arka planı değiştirmek için özel bir resim (JPG, PNG) seçin.",
+      "current": "Geçerli Seçim"
+    },
+    "profile": {
+      "blade_title": "Profil"
+    }
+  },
+  "it": {
+    "dashboard_menu": {
+      "home": "HOME",
+      "achievements": "OBIETTIVI",
+      "games": "GIOCHI",
+      "settings": "IMPOSTAZIONI",
+      "about": "INFORMAZIONI",
+      "opentray": "Apri Vano",
+      "gamelibrary": "Libreria Giochi",
+      "change_bg": "Cambia Sfondo",
+      "reset_bg": "Ripristina Sfondo",
+      "online": "Online",
+      "offline": "Offline"
+    },
+    "settings": {
+      "Settings-Core_title": "Impostazioni di Base",
+      "Settings-Color_title": "Colore Interfaccia",
+      "Settings-Theme_title": "Impostazioni Tema",
+      "Settings-Wellpaper_title": "Sfondo",
+      "Settings-Sound_title": "Impostazioni Audio",
+      "Settings-Language_title": "Lingua"
+    },
+    "guide": {
+      "home": "HOME",
+      "settings": "IMPOSTAZIONI",
+      "games": "GIOCHI"
+    },
+    "library": {
+      "search_game": "Cerca gioco..."
+    },
+    "about": {
+      "theme_title": "Dashboard Xbox 360 Blades (2005)",
+      "theme_desc": "Vivi la pura nostalgia dell'interfaccia originale di Xbox 360. Questo tema meticolosamente realizzato fa rivivere gli iconici suoni swoosh, la classica estetica bianca e grigia e le indimenticabili transizioni a lama che hanno definito una generazione di giochi.",
+      "ui_version": "Versione UI:",
+      "system": "Sistema:",
+      "about": "INFORMAZIONI"
+    },
+    "display": {
+      "title": "Impostazioni Sfondo",
+      "home_wallpaper": "Sfondo Home",
+      "games_wallpaper": "Sfondo Giochi",
+      "settings_wallpaper": "Sfondo Impostazioni",
+      "about_wallpaper": "Sfondo Informazioni",
+      "wall_bg_desc": "Seleziona un'immagine personalizzata (JPG, PNG) per sostituire lo sfondo predefinito.",
+      "current": "Selezione Attuale"
+    },
+    "profile": {
+      "blade_title": "Profilo"
+    }
+  },
+  "fr": {
+    "dashboard_menu": {
+      "home": "ACCUEIL",
+      "achievements": "SUCCÈS",
+      "games": "JEUX",
+      "settings": "PARAMÈTRES",
+      "about": "À PROPOS",
+      "opentray": "Ouvrir le Lecteur",
+      "gamelibrary": "Bibliothèque de Jeux",
+      "change_bg": "Changer le Fond",
+      "reset_bg": "Réinitialiser le Fond",
+      "online": "En ligne",
+      "offline": "Hors ligne"
+    },
+    "settings": {
+      "Settings-Core_title": "Paramètres Principaux",
+      "Settings-Color_title": "Couleur de l'Interface",
+      "Settings-Theme_title": "Paramètres du Thème",
+      "Settings-Wellpaper_title": "Paramètres du Fond d'écran",
+      "Settings-Sound_title": "Paramètres Audio",
+      "Settings-Language_title": "Langue"
+    },
+    "guide": {
+      "home": "ACCUEIL",
+      "settings": "PARAMÈTRES",
+      "games": "JEUX"
+    },
+    "library": {
+      "search_game": "Rechercher un jeu..."
+    },
+    "about": {
+      "theme_title": "Interface Xbox 360 Blades (2005)",
+      "theme_desc": "Vivez la pure nostalgie de l'interface originale de la Xbox 360. Ce thème méticuleusement conçu ravive les sons swoosh emblématiques, l'esthétique classique blanche et grise et les transitions de lames inoubliables qui ont défini une génération de joueurs.",
+      "ui_version": "Version de l'UI :",
+      "system": "Système :",
+      "about": "À PROPOS"
+    },
+    "display": {
+      "title": "Paramètres du Fond d'écran",
+      "home_wallpaper": "Fond d'écran Accueil",
+      "games_wallpaper": "Fond d'écran Jeux",
+      "settings_wallpaper": "Fond d'écran Paramètres",
+      "about_wallpaper": "Fond d'écran À Propos",
+      "wall_bg_desc": "Sélectionnez une image personnalisée (JPG, PNG) pour remplacer l'arrière-plan par défaut.",
+      "current": "Sélection Actuelle"
+    },
+    "profile": {
+      "blade_title": "Profil"
+    }
+  }
+}

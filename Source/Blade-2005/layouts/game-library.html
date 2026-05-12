@@ -1,0 +1,349 @@
+<section class="page classic-gl-page" id="game-library" x-data>
+    
+    <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/Games.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+    <div class="global-glass-bg" style="z-index:-1;"></div>
+
+    <div class="classic-gl-container">
+        
+        <header class="classic-gl-header">
+            <div class="classic-gl-title" x-text="$store.app.t('dashboard_menu.games') || 'MY GAMES'"></div>
+            <div class="classic-gl-profile">
+                <div class="p-name" x-text="$store.app.playerTag || 'Player Name'"></div>
+                <div class="classic-gl-avatar">
+                    <template x-if="$store.app.userAvatar"><img :src="$store.app.userAvatar" style="width:100%; height:100%; object-fit:cover;"></template>
+                    <template x-if="!$store.app.userAvatar"><div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#fff;">☺</div></template>
+                </div>
+            </div>
+        </header>
+
+        <main class="classic-gl-body">
+            <div class="classic-gl-list">
+                <template x-for="(game, index) in $store.app.filteredLibraryGames" :key="game.path">
+                    <div class="classic-gl-item" :id="'game-item-' + index" :class="{'focused': $store.app.focusedIndex === index && !$store.app.isKeyboardOpen && !$store.app.showGameInfoOverlay}" @click="$store.app.focusedIndex = index; $store.actions.selectFocusedItem()">
+                        <img :src="game.iconUrl || game.coverUrl" class="gl-item-icon">
+                        <div class="gl-item-name" x-text="game.name"></div>
+                    </div>
+                </template>
+            </div>
+            <div class="classic-gl-preview">
+                <div class="gl-preview-title">
+                    <template x-if="$store.app.filteredLibraryGames[$store.app.focusedIndex]"><span x-text="$store.app.filteredLibraryGames[$store.app.focusedIndex].name"></span></template>
+                </div>
+                <div class="gl-preview-hero" :style="$store.app.filteredLibraryGames[$store.app.focusedIndex]?.heroUrl && $store.app.filteredLibraryGames[$store.app.focusedIndex]?.heroUrl !== 'none' ? `background-image: url('${$store.app.filteredLibraryGames[$store.app.focusedIndex].heroUrl}')` : `background-image: url('${$store.app.filteredLibraryGames[$store.app.focusedIndex]?.coverUrl}')`"></div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="nxe-footer-left">
+        <div class="footer-button" id="btn-a">
+            <span class="button-icon a">A</span>
+            <span x-text="$store.app.t('generic.select')">Select</span>
+        </div>
+        <div class="footer-button" id="btn-b" @click.prevent="$store.actions.goBack()">
+            <span class="button-icon b">B</span>
+            <span x-text="$store.app.t('generic.back')">Back</span>
+        </div>
+        
+        <div class="footer-button" id="btn-y" @click.prevent="$store.actions.deleteFocusedGame()">
+            <span class="button-icon y">Y</span>
+            <span x-text="$store.app.t('library.delete_game')">Delete Game</span>
+        </div>
+
+        <div class="footer-button" id="btn-info">
+            <span class="button-icon rb-icon">RB</span>
+            <span x-text="$store.app.t('library.details')">Details</span>
+        </div>
+        <div class="footer-button" id="btn-x" x-show="$store.app.focusedGamePatchInfo && $store.app.focusedGamePatchInfo.fileName" @click.prevent="$store.actions.loadView('patches-manager')">
+            <span class="button-icon x">X</span>
+            <span x-text="$store.app.t('library.patches')">Patches</span>
+        </div>
+        <div class="footer-button" id="btn-opt" 
+            x-show="$store.app.filteredLibraryGames[$store.app.focusedIndex] && $store.app.filteredLibraryGames[$store.app.focusedIndex].hasOptimizedSettings"
+            @click.prevent="$store.actions.applyOptimizedSettings()">
+            <span class="button-icon lt-icon">LT</span>
+            <span x-text="$store.app.t('library.apply_optimized_settings') || 'Apply optimized_settings'">Apply optimized_settings</span>
+        </div>
+        <div class="footer-button" id="btn-lb" @click.prevent="$store.actions.openGameConfig()">
+            <span class="button-icon lb-icon">LB</span>
+            <span x-text="$store.app.t('library.game_config')">Game Config</span>
+        </div>
+        <div class="footer-button" id="btn-back" 
+            x-show="!$store.app.filteredLibraryGames[$store.app.focusedIndex].titleID"
+            @click.prevent="$store.actions.performDeepScan()">
+            <span class="button-icon back-icon">BACK</span> 
+            <span id="deep-scan-text" x-text="$store.app.t('library.deep_scan')">Deep Scan (Fix ID)</span>
+        </div>
+        <div class="footer-button" id="btn-rt" @click.prevent="$store.actions.openArtManager()">
+            <span class="button-icon rt-icon">RT</span>
+            <span x-text="$store.app.t('library.art_manager')">Art Manager</span>
+        </div>
+
+        <div class="footer-button" id="btn-zar-scan" 
+            x-show="$store.app.filteredLibraryGames[$store.app.focusedIndex].fileName.toLowerCase().endsWith('.zar') && !$store.app.filteredLibraryGames[$store.app.focusedIndex].titleID"
+            @click.prevent="$store.actions.performZarScan()">
+            <span class="button-icon L3-icon">L3</span> 
+            <span id="zar-scan-text" x-text="$store.app.t('library.zar_scan')">Scan ZAR Title ID</span>
+        </div>
+
+        <div class="footer-button" id="btn-rename" @click.prevent="$store.actions.startRename()">
+            <span class="button-icon start-icon">START</span> 
+            <span x-text="$store.app.t('library.rename') || 'Rename'">Rename</span>
+        </div>
+       <div class="footer-button" id="btn-search" style="cursor: pointer;" @click.prevent="$store.actions.toggleKeyboard()">
+            <span class="button-icon r3-icon">R3</span> 
+            <span x-show="!$store.app.librarySearch" x-text="$store.app.t('library.search_game') || 'Search Game'"></span>
+            <span x-show="$store.app.librarySearch" x-text="$store.app.librarySearch" style="color: #107c10; font-weight: 800; background: rgba(255,255,255,0.8); padding: 2px 8px; border-radius: 4px;"></span>
+        </div>
+        
+    </footer>
+
+    <div class="profile-blade-overlay" x-show="$store.app.showGameInfoOverlay" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-x-full" x-transition:enter-end="opacity-100 translate-x-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-x-0" x-transition:leave-end="opacity-0 translate-x-full" style="display: none;" x-cloak>
+        <div class="profile-blade-backdrop" @click="$store.app.showGameInfoOverlay = false"></div>
+        <div class="game-details-blade-master">
+            <div class="game-details-spine"><span x-text="$store.app.t('library.details') || 'DETAILS'"></span></div>
+            <div class="game-details-content">
+                <template x-if="$store.app.filteredLibraryGames[$store.app.focusedIndex]">
+                    <div style="display: flex; flex-direction: column; height: 100%;">
+                        
+                        <div class="details-blade-header">
+                            <img :src="$store.app.filteredLibraryGames[$store.app.focusedIndex].iconUrl || $store.app.filteredLibraryGames[$store.app.focusedIndex].coverUrl" class="details-blade-icon">
+                            <div>
+                                <div class="details-blade-title" x-text="$store.app.filteredLibraryGames[$store.app.focusedIndex].name"></div>
+                                <div class="title-id-text">Title ID: <span x-text="$store.app.filteredLibraryGames[$store.app.focusedIndex].titleID || 'No ID'"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="details-blade-body">
+                            <div class="details-box-gray">
+                                <h4 x-text="$store.app.t('library.description') || 'Description'"></h4>
+                                <p x-show="$store.app.gameExtendedInfo.loading" x-text="$store.app.t('generic.loading') || 'Loading...'"></p>
+                                <p x-show="!$store.app.gameExtendedInfo.loading" x-text="$store.app.gameExtendedInfo.description || 'No description available.'"></p>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div class="details-box-gray">
+                                    <h4 x-text="$store.app.t('library.publisher') || 'Publisher'"></h4>
+                                    <p x-text="$store.app.gameExtendedInfo.publisher || 'Unknown'"></p>
+                                </div>
+                                <div class="details-box-gray">
+                                    <h4 x-text="$store.app.t('library.developer') || 'Developer'"></h4>
+                                    <p x-text="$store.app.gameExtendedInfo.developer || 'Unknown'"></p>
+                                </div>
+                            </div>
+                            <div class="details-box-gray">
+                                <h4 x-text="$store.app.t('library.compat_status') || 'Compatibility'"></h4>
+                                <template x-if="$store.app.filteredLibraryGames[$store.app.focusedIndex].compatConfig">
+                                    <div class="compat-status-badge">
+                                        <div class="compat-color-circle" :style="`background: ${$store.app.filteredLibraryGames[$store.app.focusedIndex].compatConfig.color};`"></div>
+                                        <span class="compat-text" x-text="$store.app.filteredLibraryGames[$store.app.focusedIndex].compatConfig.text"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <div class="profile-blade-footer" style="position: relative; bottom: 0; margin-top: 20px; justify-content: flex-end;">
+                            <div class="pb-footer-btn" @click.prevent="$store.actions.handleTranslationClick()">
+                                <span class="button-icon lt-icon">LT</span> 
+                                <span x-text="$store.app.gameExtendedInfo.isTranslating ? '...' : ($store.app.gameExtendedInfo.translatedDescription ? $store.app.t('library.Original') || 'Original' : $store.app.t('library.Translate') || 'Translate')"></span>
+                            </div>
+                             <span class="footer-button" id="btn-info">
+                                <span class="button-icon rb-icon">RB</span>
+                                <span x-text="$store.app.t('library.Close')">Close</span>
+                            </span>
+                        </div>
+
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div class="patch-selector-overlay" x-show="$store.app.isPatchSelectorOpen" x-transition.opacity style="display: none;">
+        <div class="patch-selector-box">
+            
+            <div class="patch-selector-header">
+                <h3 x-text="$store.app.t('library.select_patch') || 'Select Patch File'"></h3>
+                <span x-text="$store.app.patchSelectorFiles.length + ' ' + ($store.app.t('library.versions_found') || 'VERSIONS')"></span>
+            </div>
+            
+            <div class="patch-selector-list" x-effect="$store.app.patchSelectorIndex; $nextTick(() => { let f = $el.querySelector('.focused'); if(f) f.scrollIntoView({block: 'center', behavior: 'smooth'}) })">
+                <template x-for="(file, index) in $store.app.patchSelectorFiles" :key="index">
+                    <div class="patch-file-item" 
+                        :class="{'focused': $store.app.patchSelectorIndex === index}"
+                        @click="$store.app.patchSelectorIndex = index; $store.actions.selectPatchFileAndOpen()">
+                        
+                        <span class="file-icon">📄</span>
+                        <span class="file-name" x-text="file.replace($store.app.focusedGamePatchInfo.titleID + ' - ', '').replace('.patch.toml', '')"></span>
+                        
+                        <span class="file-tag" x-show="file.includes('TU')" x-text="$store.app.t('library.tag_update') || 'UPDATE'"></span>
+                        <span class="file-tag region" x-show="file.includes('Japan')" x-text="$store.app.t('library.tag_jpn') || 'JPN'"></span>
+                        <span class="file-tag region" x-show="file.includes('Europe')" x-text="$store.app.t('library.tag_eur') || 'EUR'"></span>
+                        <span class="file-tag region" x-show="file.includes('USA')" x-text="$store.app.t('library.tag_usa') || 'USA'"></span>
+                    </div>
+                </template>
+            </div>
+
+            <div class="patch-selector-footer">
+                <div><span class="button-icon a">A</span> <span x-text="$store.app.t('generic.select') || 'Select'"></span></div>
+                <div><span class="button-icon b">B</span> <span x-text="$store.app.t('generic.cancel') || 'Cancel'"></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="art-manager-overlay" :class="{'active': $store.app.isArtManagerOpen}">
+        <div class="art-manager-glass-box">
+            
+            <div class="art-header">
+                <h2 x-text="$store.app.artManagerData.gameName">Game Name</h2>
+                <div class="art-tabs">
+                    <span class="bumper-hint">LB</span> 
+                    <template x-for="tab in $store.app.artTabs">
+                        <div class="art-tab" :class="{'active': $store.app.artManagerData.selectedTab === tab}">
+                            <span x-text="$store.app.t('art.tab_' + tab)"></span>
+                        </div>
+                    </template>
+                    <span class="bumper-hint">RB</span> 
+                </div>
+            </div>
+
+            <div class="art-body custom-scrollbar">
+                
+                <div x-show="$store.app.artManagerData.loading" class="art-loading">
+                    <div class="spinner"></div>
+                    <span x-text="$store.app.t('art.loading')">Fetching...</span>
+                </div>
+
+                <div x-show="$store.app.artManagerData.error" class="art-error">
+                    <span x-text="$store.app.artManagerData.error"></span>
+                </div>
+
+                <div class="art-grid" 
+                     :class="$store.app.artManagerData.selectedTab"
+                     x-show="!$store.app.artManagerData.loading"
+                     x-effect="$store.app.artManagerData.focusedAssetIndex; $nextTick(() => { let f = $el.querySelector('.focused'); if(f) f.scrollIntoView({block: 'center', behavior: 'smooth'}) })">
+                    
+                    <template x-for="(asset, index) in $store.app.artManagerData.assets">
+                        <div class="art-item" 
+                             :id="'art-item-' + index"
+                             :class="{'focused': $store.app.artManagerData.focusedAssetIndex === index}"
+                             @click="$store.app.artManagerData.focusedAssetIndex = index; $store.actions.applyArtAsset(asset.full)">
+                            
+                            <img :src="asset.thumb" loading="lazy">
+                            
+                        </div>
+                    </template>
+                    
+                    <div x-show="$store.app.artManagerData.assets.length === 0 && !$store.app.artManagerData.loading" class="no-art">
+                        <span x-text="$store.app.t('art.no_results')">No images found.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="art-footer">
+                <div class="btn-group">
+                    <div class="footer-btn">
+                        <span class="icon a">A</span> 
+                        <span x-text="$store.app.t('generic.select')">Select</span>
+                    </div>
+                    <div class="footer-btn">
+                        <span class="icon x">X</span> 
+                        <span x-text="$store.app.t('art.browse_local')">Local File</span>
+                    </div>
+                    <div class="footer-btn">
+                        <span class="icon b">B</span> 
+                        <span x-text="$store.app.t('generic.close')">Close</span>
+                    </div>
+                </div>
+                <div class="provider-logo">
+                    <span x-text="$store.app.t('art.powered_by') || 'Powered by'"></span> 
+                    <b :style="{ 
+                        color: $store.app.settings.artSource === 'LocalDB' ? '#107c10' : '#3a82e5' 
+                    }" 
+                    x-text="$store.app.settings.artSource || 'SteamGridDB'">
+                    </b>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="keyboard-overlay xbox-theme" :class="{'open': $store.app.isKeyboardOpen}" @click.self="$store.app.isKeyboardOpen = false">
+        
+        <div class="xbox-kb-wrapper">
+            
+            <div class="kb-top-label" x-text="$store.app.t('library.search_placeholder') || 'Search / Rename'"></div>
+
+            <div class="xbox-kb-input-row">
+                <input type="text" class="xbox-kb-input" 
+                    x-model="$store.app[ $store.app.keyboardMode === 'rename' ? 'renameInput' : 'librarySearch' ]" 
+                    readonly>
+                <div class="input-cursor"></div>
+            </div>
+
+            <div class="xbox-kb-main-body">
+                
+                <div class="kb-col side-col left">
+                    <div class="side-btn">
+                        <div class="btn-icon-visual lb-shape"><span class="arr-left">◀</span> LB</div>
+                        <span class="btn-label" x-text="$store.app.t('generic.left') || 'Left'"></span>
+                    </div>
+                    <div class="side-btn" :class="{'active-state': $store.app.isSymbols}">
+                        <div class="btn-icon-visual lt-shape">LT</div>
+                        <span class="btn-label" x-text="$store.app.t('generic.symbols') || 'Symbols'"></span>
+                    </div>
+                    
+                    <div class="side-btn" :class="{'active-state': $store.app.isCaps}">
+                        <div class="btn-icon-visual stick-shape">L3</div>
+                        <span class="btn-label" x-text="$store.app.t('generic.caps') || 'Caps'"></span>
+                    </div>
+                </div>
+
+                <div class="kb-col center-col">
+                    <div class="keys-grid-tight">
+                        <template x-for="(row, rIndex) in $store.app.currentKeys" :key="rIndex">
+                            <div class="keys-row-tight">
+                                <template x-for="(key, cIndex) in row" :key="cIndex">
+                                    <div class="xbox-key-tight"
+                                         :class="{'focused': $store.app.keyboardRow === rIndex && $store.app.keyboardCol === cIndex}"
+                                         @click="$store.app.keyboardRow = rIndex; $store.app.keyboardCol = cIndex; $store.actions.pressKeyboardKey()">
+                                        <span x-text="key"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="bottom-actions-row">
+                        <div class="wide-action-btn" @click="$store.actions.handleKeyboardSpecial('BACKSPACE')">
+                            <div class="circle-icon blue">X</div>
+                            <span x-text="$store.app.t('generic.backspace') || 'Backspace'"></span>
+                        </div>
+                        <div class="wide-action-btn" @click="$store.actions.handleKeyboardSpecial('SPACE')">
+                            <div class="circle-icon yellow">Y</div>
+                            <span x-text="$store.app.t('generic.space') || 'Space'"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kb-col side-col right">
+                    <div class="side-btn">
+                        <div class="btn-icon-visual rb-shape">RB <span class="arr-right">▶</span></div>
+                        <span class="btn-label" x-text="$store.app.t('generic.right') || 'Right'"></span>
+                    </div>
+                    <div class="side-btn" :class="{'active-state': $store.app.isAccents}">
+                        <div class="btn-icon-visual rt-shape">RT</div>
+                        <span class="btn-label" x-text="$store.app.t('generic.accents') || 'Accents'"></span>
+                    </div>
+                    <div class="done-btn-container" @click="$store.actions.handleKeyboardSpecial('DONE')">
+                        <div class="play-icon-circle">▶</div>
+                        <span x-text="$store.app.t('generic.done') || 'Done'"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="kb-black-footer">
+                <div class="footer-item"><div class="circle-icon green-small">A</div> <span x-text="$store.app.t('generic.select') || 'Select'"></span></div>
+                <div class="footer-item" @click="$store.app.isKeyboardOpen = false"><div class="circle-icon red-small">B</div> <span x-text="$store.app.t('generic.cancel') || 'Cancel'"></span></div>
+            </div>
+
+        </div>
+    </div>
+</section>

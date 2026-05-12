@@ -1,0 +1,76 @@
+<section class="page" id="settings-display" x-data>
+    <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/Settings.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+    <div class="global-glass-bg" style="z-index:-1;"></div>
+    <div class="nxe-settings-wrapper">
+        <h1 class="nxe-settings-title" x-text="$store.app.t('display.title') || 'Wallpaper Settings'"></h1> 
+        
+        <div class="nxe-settings-container">
+            
+            <nav class="nxe-settings-menu" style="width: 42%;">
+                <div class="nxe-settings-item" id="display-item-0" :class="{'focused': $store.app.focusedIndex === 0}" @click.prevent="$store.app.focusedIndex = 0; $store.actions.selectFocusedItem()">
+                    <img class="nxe-settings-icon" src="assets/icons/image.png" alt="">
+                    <span x-text="$store.app.t('display.home_wallpaper') || 'Home Wallpaper'"></span>
+                </div>
+                
+                <div class="nxe-settings-item" id="display-item-1" :class="{'focused': $store.app.focusedIndex === 1}" @click.prevent="$store.app.focusedIndex = 1; $store.actions.selectFocusedItem()">
+                    <img class="nxe-settings-icon" src="assets/icons/image.png" alt="">
+                    <span x-text="$store.app.t('display.games_wallpaper') || 'Games Wallpaper'"></span>
+                </div>
+                
+                <div class="nxe-settings-item" id="display-item-2" :class="{'focused': $store.app.focusedIndex === 2}" @click.prevent="$store.app.focusedIndex = 2; $store.actions.selectFocusedItem()">
+                    <img class="nxe-settings-icon" src="assets/icons/image.png" alt="">
+                    <span x-text="$store.app.t('display.settings_wallpaper') || 'Settings Wallpaper'"></span>
+                </div>
+                
+                <div class="nxe-settings-item" id="display-item-3" :class="{'focused': $store.app.focusedIndex === 3}" @click.prevent="$store.app.focusedIndex = 3; $store.actions.selectFocusedItem()">
+                    <img class="nxe-settings-icon" src="assets/icons/image.png" alt="">
+                    <span x-text="$store.app.t('display.about_wallpaper') || 'About Wallpaper'"></span>
+                </div>
+            </nav>
+            
+            <div class="nxe-settings-description">
+                <div>
+                    <h3 x-text="[$store.app.t('display.home_wallpaper') || 'Home Wallpaper', 
+                                 $store.app.t('display.games_wallpaper') || 'Games Wallpaper', 
+                                 $store.app.t('display.settings_wallpaper') || 'Settings Wallpaper', 
+                                 $store.app.t('display.about_wallpaper') || 'About Wallpaper'][$store.app.focusedIndex]"></h3>
+                    
+                    <p x-text="$store.app.t('display.wall_bg_desc') || 'Select a custom image (JPG, PNG) to replace the default background.'"></p>
+                    
+                    <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;">
+                    <p style="font-size: 0.9rem; color: #ccc;" x-text="($store.app.t('display.current') || 'Current Selection') + ':'"></p>
+                    
+                    <p style="color: #107c10; font-weight: bold; word-break: break-all;" 
+                       x-text="(() => {
+                           const bgKeys = ['homeBg', 'gamesBg', 'settingsBg', 'aboutBg'];
+                           const currentBg = $store.app.displaySettings[bgKeys[$store.app.focusedIndex]];
+                           return currentBg ? currentBg.split(/[\\/]/).pop() : ($store.app.t('generic.default') || 'Default');
+                       })()"></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <footer class="nxe-footer-left">
+        <div class="footer-button" id="btn-a">
+            <span class="button-icon a">A</span> 
+            <span x-text="$store.app.t('generic.select') || 'Change'"></span>
+        </div>
+        <div class="footer-button" id="btn-b" @click.prevent="$store.actions.goBack()">
+            <span class="button-icon b">B</span> 
+            <span x-text="$store.app.t('generic.back') || 'Back'"></span>
+        </div>
+        <div class="footer-button" id="btn-y" @click.prevent="$store.actions.resetDisplaySettings()">
+            <span class="button-icon y">Y</span> 
+            <span x-text="$store.app.t('generic.default') || 'Default'"></span>
+        </div>
+    </footer>
+
+    <style>
+        html[dir="rtl"] #settings-display .nxe-settings-item { display: flex !important; flex-direction: row-reverse !important; direction: ltr !important; justify-content: flex-start !important; gap: 15px !important; }
+        html[dir="rtl"] #settings-display .nxe-settings-item span { direction: rtl !important; text-align: right !important; flex-grow: 1 !important; }
+        html[dir="rtl"] #settings-display .nxe-settings-icon { margin: 0 !important; }
+        html[dir="rtl"] #settings-display .nxe-settings-description { text-align: right !important; direction: rtl !important; }
+    </style>
+</section>

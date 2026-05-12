@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr"> <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenia Dashboard</title>
+    
+    <link id="theme-stylesheet" rel="stylesheet" href=""> 
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'XBOX', 'Source Sans 3', 'Segoe UI', Tahoma, sans-serif;
+            position: relative;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="nxe-dashboard" x-data x-cloak>
+        <div id="view-host" x-html="$store.app.currentViewHTML">
+        </div>
+    </div>
+    
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+
+    <audio id="select-sound" src="assets/audio/Select A (Alt).wav" preload="auto"></audio>
+    <audio id="back-sound" src="assets/audio/Back.wav" preload="auto"></audio>
+    <audio id="focus-sound" src="assets/audio/move.wav" preload="auto"></audio>
+    <audio id="channel-up-sound" src="assets/audio/Page Left.wav" preload="auto"></audio>
+    <audio id="channel-down-sound" src="assets/audio/Page Right.wav" preload="auto"></audio>
+    <audio id="panel-left-sound" src="assets/audio/panel-unfold.wav" preload="auto"></audio>
+    <audio id="panel-right-sound" src="assets/audio/panel-unfold.wav" preload="auto"></audio>
+    <audio id="panel-unfold-sound" src="assets/audio/guide-open.wav" preload="auto"></audio>
+    <audio id="bgm-player" loop></audio>
+
+    <script src="theme.js"></script>
+    <script src="app-core://core.js"></script>
+    
+    <script src="app-core://cdn.min.js"></script>
+    
+
+    <div id="guide-overlay" 
+     class="nxe-guide-overlay" 
+     x-show="$store.app.isGuideOpen" 
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="opacity-0 translate-x-[-50px]"
+     x-transition:enter-end="opacity-100 translate-x-0"
+     x-transition:leave="transition ease-in duration-200"
+     x-transition:leave-start="opacity-100 translate-x-0"
+     x-transition:leave-end="opacity-0 translate-x-[-50px]"
+     style="display: none;">
+
+    <div class="nxe-guide-backdrop"></div>
+
+    <div class="nxe-guide-master">
+        
+        <div class="nxe-guide-header">
+            <div class="nxe-guide-title">XENIA GUIDE</div>
+            <div class="nxe-guide-time" x-text="$store.app.systemTime || '12:00 PM'"></div>
+        </div>
+
+        <div class="nxe-blades-container">
+
+            <div class="nxe-blade blade-settings" 
+                :class="{'active': $store.app.guideTabs[$store.app.guideTabIndex].id === 'settings'}"
+                :style="{
+                    'order': $store.app.guideTabs[$store.app.guideTabIndex].id === 'settings' ? 1 : ($store.app.guideTabs[$store.app.guideTabIndex].id === 'games' ? 2 : 3),
+                    'z-index': $store.app.guideTabs[$store.app.guideTabIndex].id === 'settings' ? 10 : ($store.app.guideTabs[$store.app.guideTabIndex].id === 'games' ? 9 : 8)
+                }">
+                 
+                <div class="nxe-content" x-show="$store.app.guideTabs[$store.app.guideTabIndex].id === 'settings'">
+                    <ul class="nxe-menu-list scrollable">
+                        <template x-for="(item, index) in $store.app.settingsMenu" :key="item.id">
+                            <li :id="'guide-settings-' + index" 
+                                :class="{'selected': $store.app.guideMenuIndex === index}"
+                                @click.prevent="$store.actions.selectFocusedItem()">
+                                
+                                <template x-if="item.icon">
+                                    <img :src="item.icon" style="width: 24px; height: 24px; margin-right: 15px; object-fit: contain; filter: drop-shadow(1px 0 0 #333) drop-shadow(-1px 0 0 #333) drop-shadow(0 1px 0 #333) drop-shadow(0 -1px 0 #333);">
+                                </template>
+                                
+                                <span style="flex: 1;" x-text="$store.app.t('settings.' + item.id + '_title') || item.name"></span>
+                                
+                                <template x-if="item.id === 'language'">
+                                    <span class="guide-lang-badge" style="background: rgba(0,0,0,0.1); padding: 2px 6px; border-radius: 4px; font-size: 12px; font-weight: 900;" x-text="$store.app.language.toUpperCase()"></span>
+                                </template>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+                <div class="nxe-spine"><span x-text="$store.app.t('guide.settings') || 'SETTINGS'"></span></div>
+            </div>
+
+            <div class="nxe-blade blade-home" 
+                :class="{'active': $store.app.guideTabs[$store.app.guideTabIndex].id === 'home'}"
+                :style="{
+                    'order': $store.app.guideTabs[$store.app.guideTabIndex].id === 'home' ? 1 : ($store.app.guideTabs[$store.app.guideTabIndex].id === 'settings' ? 2 : 3),
+                    'z-index': $store.app.guideTabs[$store.app.guideTabIndex].id === 'home' ? 10 : ($store.app.guideTabs[$store.app.guideTabIndex].id === 'settings' ? 9 : 8)
+                }">
+                 
+                <div class="nxe-content" x-show="$store.app.guideTabs[$store.app.guideTabIndex].id === 'home'">
+                    
+                    <div class="nxe-profile-card">
+                        <div class="nxe-gamerpic-container">
+                            <template x-if="$store.app.userAvatar">
+                                <img :src="$store.app.userAvatar" alt="Gamerpic" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                            </template>
+                            <template x-if="!$store.app.userAvatar">
+                                <img src="assets/icons/placeholder.png" alt="Gamerpic" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                            </template>
+                        </div>
+                        <div class="nxe-profile-details">
+                            <div class="nxe-player-name">
+                                <span x-text="$store.app.playerTag || 'Player Name'"></span> 
+                                <span class="nxe-score" x-text="$store.app.gamerscore || 0"></span>
+                            </div>
+                            <div class="nxe-player-status">Status <span class="nxe-status-text">Online</span></div>
+                        </div>
+                    </div>
+
+                    <ul class="nxe-menu-list">
+                        <li id="guide-home-0" :class="{'selected': $store.app.guideMenuIndex === 0}">
+                            <span x-text="$store.app.t('guide.dashboard') || 'XENIA DASHBOARD'"></span>
+                        </li>
+                        <li id="guide-home-1" :class="{'selected': $store.app.guideMenuIndex === 1}">
+                            <span class="label" x-text="$store.app.t('guide.friend_list') || 'FRIEND LIST'"></span>
+                        </li>
+                        <li id="guide-home-2" :class="{'selected': $store.app.guideMenuIndex === 2}">
+                            <span x-text="$store.app.t('guide.shutdown') || 'SHUTDOWN SYSTEM'"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nxe-spine"><span x-text="$store.app.t('guide.home') || 'HOME'"></span></div>
+            </div>
+
+            <div class="nxe-blade blade-games" 
+                :class="{'active': $store.app.guideTabs[$store.app.guideTabIndex].id === 'games'}"
+                :style="{
+                    'order': $store.app.guideTabs[$store.app.guideTabIndex].id === 'games' ? 1 : ($store.app.guideTabs[$store.app.guideTabIndex].id === 'home' ? 2 : 3),
+                    'z-index': $store.app.guideTabs[$store.app.guideTabIndex].id === 'games' ? 10 : ($store.app.guideTabs[$store.app.guideTabIndex].id === 'home' ? 9 : 8)
+                }">
+                
+                <div class="nxe-content" x-show="$store.app.guideTabs[$store.app.guideTabIndex].id === 'games'">
+                    <ul class="nxe-menu-list scrollable">
+                        <template x-for="(game, index) in $store.app.gamesList" :key="game.path">
+                            <li :id="'guide-game-' + index" :class="{'selected': $store.app.guideMenuIndex === index}">
+                                <img :src="($store.app.filteredLibraryGames.find(g => g.titleID === game.titleID)?.iconUrl) || game.coverUrl || 'assets/icons/placeholder.png'" 
+                                    style="width: 35px; height: 35px; border-radius: 4px; object-fit: cover; margin-right: 15px; border: 1px solid rgba(0,0,0,0.2);">
+                                <span x-text="game.name"></span>
+                            </li>
+                        </template>
+                        <li x-show="$store.app.gamesList.length === 0" style="justify-content:center; border:none; background: transparent; box-shadow: none;">
+                            <span style="color:#888;" x-text="$store.app.t('guide.no_games') || 'No games found'"></span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nxe-spine"><span x-text="$store.app.t('guide.games') || 'GAMES'"></span></div>
+            </div>
+
+        </div>
+
+        <div class="nxe-guide-footer">
+            <div class="nxe-btn">
+                <div class="btn-bubble btn-a">A</div>
+                <span x-text="$store.app.t('generic.select') || 'Select'"></span>
+            </div>
+            <div class="nxe-btn">
+                <div class="btn-bubble btn-b">B</div>
+                <span x-text="$store.app.t('generic.close') || 'Back'"></span>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    
+    .shutdown-crt {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: black;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 9999;
+        transition: opacity 0.1s;
+    }
+
+    
+    .shutdown-active {
+        opacity: 1;
+        animation: turn-off 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    @keyframes turn-off {
+        0% {
+            transform: scale(1, 1.3) translate3d(0, 0, 0);
+            -webkit-filter: brightness(1);
+            filter: brightness(1);
+            opacity: 1;
+        }
+        60% {
+            transform: scale(1, 0.001) translate3d(0, 0, 0);
+            -webkit-filter: brightness(10);
+            filter: brightness(10);
+        }
+        100% {
+            animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+            transform: scale(0, 0.001) translate3d(0, 0, 0);
+            -webkit-filter: brightness(0);
+            filter: brightness(0);
+        }
+    }
+
+    
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
+    
+    html[dir="rtl"] body {
+        font-family: 'Tajawal', 'Segoe UI', sans-serif !important;
+    }
+
+    
+    html[dir="rtl"] .nxe-settings-wrapper,
+    html[dir="rtl"] .marketplace-header,
+    html[dir="rtl"] .info-card-header {
+        flex-direction: row-reverse;
+    }
+
+    html[dir="rtl"] .nxe-footer-left {
+        right: 50px; left: auto; flex-direction: row-reverse;
+    }
+    html[dir="rtl"] .nxe-footer-right {
+        left: 50px; right: auto;
+    }
+    html[dir="rtl"] .footer-button {
+        flex-direction: row-reverse;
+    }
+    html[dir="rtl"] .button-icon {
+        margin-right: 0; margin-left: 10px;
+    }
+
+    
+    html[dir="rtl"] .dashboard-drawer,
+    html[dir="rtl"] .download-drawer {
+        left: -420px; right: auto;
+        border-left: none; border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    html[dir="rtl"] .dashboard-drawer.open,
+    html[dir="rtl"] .download-drawer.open {
+        transform: translateX(420px);
+    }
+
+    
+    html[dir="rtl"] .nxe-settings-icon {
+        margin-right: 0; margin-left: 15px;
+    }
+
+    
+    html[dir="rtl"] .search-icon {
+        right: 12px; left: auto;
+    }
+    html[dir="rtl"] .search-box-wrapper input {
+        padding: 10px 35px 10px 15px;
+    }
+    html[dir="rtl"] .rb-hint {
+        left: 15px; right: auto;
+    }
+</style>
+
+<div x-data x-show="$store.app.showX360tidNotify" 
+     class="nxe-global-overlay" 
+     style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 999999; width: auto; height: auto;">
+    
+    <div class="nxe-alert-box" 
+         :dir="$store.app.language === 'ar' ? 'rtl' : 'ltr'"
+         style="background: #111; border: 2px solid #ff4444; width: 600px; padding: 30px; border-radius: 20px; box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.85), 0 0 50px rgba(0, 0, 0, 1); animation: nxe-page-slide-in 0.3s; color: white; position: relative;">
+        
+        <h2 style="color: #ff4444; margin-top: 0; display: flex; align-items: center; gap: 12px; justify-content: center;">
+            <span style="font-size: 2rem;">⚠</span>
+            <span x-html="$store.app.t('scan_tool.title')"></span>
+        </h2>
+        
+        <div style="background: rgba(255, 68, 58, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 20px; border: 1px dashed #ff4444;">
+            <p style="margin: 0; font-weight: bold; color: #ff8c00; font-size: 1.1rem; text-align: center;" 
+               x-html="$store.app.t('scan_tool.missing')"></p>
+            <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: #ccc; text-align: center; line-height: 1.6;"
+               x-html="$store.app.t('scan_tool.desc')"></p>
+        </div>
+
+        <div style="margin: 15px 0; background: #080808; padding: 25px 20px; border-radius: 8px; border: 1px solid #222; text-align: center;">
+            
+            <template x-if="$store.app.x360tidDownloadState === 'idle' || $store.app.x360tidDownloadState === 'error'">
+                <div>
+                    <div x-show="$store.app.x360tidDownloadState === 'error'" style="color: #e5443a; margin-bottom: 15px; font-weight: bold;" x-html="$store.app.t('scan_tool.fail')"></div>
+                    
+                    <button @click="$store.actions.downloadX360tid()" 
+                            style="background: #90c31d; color: black; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(144, 195, 29, 0.3); display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto; transition: transform 0.1s;">
+                        <span style="background: #f2c40e; color: black; border-radius: 50%; width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: bold; box-shadow: inset 0 -2px 5px rgba(0,0,0,0.3);">Y</span>
+                        <span x-html="$store.app.t('scan_tool.auto_btn')"></span>
+                    </button>
+                </div>
+            </template>
+
+            <template x-if="$store.app.x360tidDownloadState === 'downloading'">
+                <div style="color: #3a82e5; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; animation: blink-cursor 1s infinite;">
+                    <span style="font-size: 1.5rem;">⬇️</span>
+                    <span x-html="$store.app.t('scan_tool.downloading')"></span>
+                </div>
+            </template>
+
+            <template x-if="$store.app.x360tidDownloadState === 'success'">
+                <div style="color: #59c853; font-weight: bold; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span style="font-size: 1.5rem;">✅</span>
+                    <span x-html="$store.app.t('scan_tool.success')"></span>
+                </div>
+            </template>
+        </div>
+
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <button @click="$store.app.showX360tidNotify = false" 
+                    style="background: transparent; color: #888; border: 1px solid #444; padding: 10px 30px; border-radius: 8px; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; font-weight: bold; transition: all 0.2s;">
+                <span style="background: #e5443a; color: white; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; box-shadow: inset 0 -2px 5px rgba(0,0,0,0.3);">B</span>
+                <span x-html="$store.app.t('generic.cancel')"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+    <style>
+        
+        .friend-list-overlay {
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.7); 
+            backdrop-filter: blur(8px);
+            z-index: 99999; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .friend-list-box {
+            width: 600px; 
+            background: #ffffff; 
+            border: 1px solid #ccc;
+            border-radius: 12px; 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column;
+            direction: ltr; 
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        .friend-list-header {
+            background: #f4f4f4; 
+            padding: 20px 25px; 
+            border-bottom: 2px solid #e0e0e0;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        
+        .friend-list-header h3 { margin: 0; color: #111; font-size: 24px; font-weight: 800; text-transform: uppercase; text-shadow: none; }
+        .friend-list-header span { color: #555; font-size: 14px; font-weight: bold; }
+        
+        .empty-friends-icon {
+            width: 60px;
+            height: 60px;
+            opacity: 0.5; 
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .friend-list-content { padding: 10px; max-height: 400px; overflow-y: auto; background: #ffffff; }
+        
+        .friend-item {
+            padding: 15px 20px; 
+            margin-bottom: 5px; 
+            border-radius: 6px;
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            background: #fafafa; 
+            border: 1px solid #eee;
+            color: #333; 
+            cursor: pointer; 
+            transition: all 0.15s ease-out;
+        }
+        
+        .friend-item.focused {
+            background: #ffffff; 
+            color: #000; 
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 2px solid #000000; 
+            z-index: 10;
+        }
+        
+        .friend-footer {
+            padding: 15px 25px; 
+            background: #f9f9f9; 
+            display: flex; 
+            gap: 30px;
+            justify-content: flex-end; 
+            border-top: 1px solid #eee;
+        }
+        
+        .friend-footer div { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #111; font-weight: bold; text-transform: uppercase;}
+        
+        .keyboard-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            
+            background: rgba(0, 0, 0, 0.7); 
+            backdrop-filter: blur(8px);
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .keyboard-overlay.open {
+            display: flex;
+            opacity: 1;
+        }
+
+        
+        .xbox-kb-wrapper {
+            width: 900px;
+            background: #ffffff; 
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .kb-top-label {
+            font-size: 1.4rem;
+            color: #111; 
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        
+        .xbox-kb-input-row {
+            background: #f9f9f9; 
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 60px;
+            box-sizing: border-box;
+        }
+
+        .xbox-kb-input {
+            background: transparent;
+            border: none;
+            color: #000; 
+            font-size: 1.8rem;
+            font-weight: bold;
+            width: 100%;
+            outline: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .input-cursor {
+            position: absolute;
+            width: 3px;
+            height: 30px;
+            background-color: #107c10; 
+            animation: blink-cursor 0.8s infinite;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .xbox-kb-main-body { display: flex; gap: 20px; justify-content: space-between; }
+        .kb-col { display: flex; flex-direction: column; gap: 10px; }
+        .center-col { flex: 1; }
+
+        .keys-grid-tight { display: flex; flex-direction: column; gap: 8px; }
+        .keys-row-tight { display: flex; justify-content: center; gap: 8px; }
+
+        
+        .xbox-key-tight {
+            width: 50px; height: 50px;
+            background: #f4f4f4; 
+            border: 1px solid #ddd;
+            border-bottom: 3px solid #ccc; 
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            color: #111; 
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.15s ease-out;
+            cursor: pointer;
+        }
+
+        
+        .xbox-key-tight.focused {
+            background: #107c10; 
+            color: #fff;
+            border-color: #0b530b;
+            border-bottom: 3px solid #0b530b;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(16, 124, 16, 0.4);
+            z-index: 10;
+        }
+
+        
+        .side-btn {
+            background: #f4f4f4;
+            padding: 15px; border-radius: 8px;
+            text-align: center; min-width: 100px;
+            border: 1px solid #ddd;
+            border-bottom: 3px solid #ccc;
+            display: flex; flex-direction: column; justify-content: center; flex: 1;
+        }
+
+        .side-btn .btn-icon-visual { color: #111; font-weight: bold; font-size: 14px; margin-bottom: 5px; }
+        .side-btn .btn-label { color: #555; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+
+        .side-btn.active-state { 
+            background: #eef7ee; 
+            border-color: #107c10; 
+            border-bottom-color: #107c10; 
+        }
+
+        
+        .done-btn-container {
+            background: #107c10; color: #fff; padding: 15px;
+            border-radius: 8px; text-align: center; cursor: pointer;
+            font-weight: bold; text-transform: uppercase;
+            border-bottom: 3px solid #0b530b;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1;
+        }
+        .play-icon-circle { font-size: 18px; margin-bottom: 5px; }
+
+        .bottom-actions-row { display: flex; justify-content: center; gap: 40px; margin-top: 25px; }
+
+        
+        .wide-action-btn { display: flex; align-items: center; gap: 10px; color: #111; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
+        .footer-item { display: flex; align-items: center; gap: 10px; color: #111; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; }
+
+        .circle-icon {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; font-size: 0.8rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .blue { background: #3a82e5; }
+        .yellow { background: #f2c40e; color: #111; }
+        .green-small { background: #59c853; color: #111; }
+        .red-small { background: #e5443a; }
+
+        
+        .kb-black-footer {
+            margin-top: 30px; border-top: 2px solid #eee;
+            padding-top: 20px; display: flex; justify-content: center; gap: 40px;
+        }
+
+        
+
+
+.button-icon, 
+.button-icon.a, .button-icon.b, .button-icon.x, .button-icon.y, .button-icon.menu,
+.btn-bubble, .btn-bubble.btn-a, .btn-bubble.btn-b,
+.circle-icon, .circle-icon.blue, .circle-icon.yellow, .circle-icon.green-small, .circle-icon.red-small,
+.friend-btn-icon, .friend-btn-icon.y, .friend-btn-icon.b, .friend-btn-icon.x, .friend-btn-icon.start,
+.art-footer .icon, .art-footer .icon.a, .art-footer .icon.b, .art-footer .icon.x,
+.start-icon,
+.bumper-hint {
+    background-color: #ffffff !important;
+    background-image: none !important; 
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important; 
+    text-shadow: none !important;
+    font-weight: 900 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+
+.button-icon.menu, .button-icon.start-icon, .button-icon.lb-icon, .button-icon.rb-icon, 
+.button-icon.lt-icon, .button-icon.rt-icon, .button-icon.back-icon, .bumper-hint, .friend-btn-icon.start {
+    border-radius: 6px !important;
+    padding: 0 8px !important;
+    width: auto !important;
+    min-width: 32px !important;
+    height: 26px !important;
+    font-size: 11px !important;
+}
+
+
+.button-icon.a, .button-icon.b, .button-icon.x, .button-icon.y, .button-icon.L3-icon, .button-icon.r3-icon,
+.btn-bubble, .circle-icon, .friend-btn-icon:not(.start), .art-footer .icon {
+    border-radius: 50% !important;
+    width: 26px !important;
+    height: 26px !important;
+    padding: 0 !important;
+    font-size: 12px !important;
+}
+
+
+.button-icon.r3-icon::before {
+    display: none !important;
+}
+
+
+.footer-button,
+.footer-button span,
+.nxe-btn span,
+.pb-footer-btn span,
+.kb-black-footer .footer-item span,
+.bottom-actions-row .wide-action-btn span,
+.friend-footer div span:not([class*="icon"]),
+.art-footer .footer-btn span:not(.icon) {
+    color: #000000 !important;
+    text-shadow: none !important;
+    font-weight: 800 !important;
+}
+
+
+.done-btn-container {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #000000 !important;
+    box-shadow: 2px 2px 0px #000000 !important;
+}
+.done-btn-container .play-icon-circle {
+    color: #000000 !important;
+}
+    </style>
+
+    <div class="friend-list-overlay" x-show="$store.app.isFriendsOverlayOpen" x-transition.opacity style="display: none;">
+        
+        <template x-if="!$store.app.isKeyboardOpen">
+            <div class="friend-list-box">
+                <div class="friend-list-header">
+                    <h3 x-text="$store.app.t('guide.friend_list') || 'Friend List'"></h3>
+                    <span x-text="$store.app.friendsList.length + ' Friends'"></span>
+                </div>
+                
+                <div class="friend-list-content custom-scrollbar">
+                    <div x-show="$store.app.friendsList.length === 0" style="text-align: center; color: #555; padding: 60px 20px;">
+                        <img src="assets/icons/Console-Xbox.png" class="empty-friends-icon" alt="Gamepad" style="filter: opacity(0.8) 
+            drop-shadow(1px 0 0 #000) 
+            drop-shadow(-1px 0 0 #000) 
+            drop-shadow(0 1px 0 #000) 
+            drop-shadow(0 -1px 0 #000) !important;">
+                        <div style="font-size: 16px; line-height: 1.8; color: #333;" x-html="$store.app.t('guide.friends_empty') || `No friends added yet.<br>Press <b>Y</b> to add a friend's XUID.`"></div>
+                    </div>
+
+                    <template x-for="(friend, index) in $store.app.friendsList" :key="index">
+                        <div 
+                            class="friend-item" 
+                            :class="{'focused': $store.app.focusedFriendIndex === index}"
+                            @click="$store.app.focusedFriendIndex = index"
+                        >
+                            <div style="width: 45px; height: 45px; background: #e0e0e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #ccc; font-size: 20px; color: #555; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+                                👤
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; flex: 1;">
+                                <span style="font-size: 18px; font-weight: 800; color: #111;" x-text="friend.name"></span>
+                                <span style="font-size: 13px; color: #666; font-family: 'Consolas', monospace; margin-top: 2px; font-weight: bold;" x-text="'XUID: ' + friend.xuid"></span>
+                            </div>
+                            
+                            <span style="background: rgba(89, 200, 83, 0.1); border: 1px solid #59c853; color: #107c10; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 900; letter-spacing: 1px;">NETPLAY</span>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="friend-footer">
+                    <div><span class="friend-btn-icon y">Y</span> <span x-text="$store.app.t('generic.add') || 'Add'"></span></div>
+                    <div><span class="friend-btn-icon x">X</span> <span x-text="$store.app.t('generic.edit') || 'Edit'"></span></div>
+                    <div><span class="friend-btn-icon start">☰</span> <span x-text="$store.app.t('generic.delete') || 'Delete'"></span></div>
+                    <div><span class="friend-btn-icon b">B</span> <span x-text="$store.app.t('generic.close') || 'Close'"></span></div>
+                </div>
+            </div>
+        </template>
+
+        
+        <template x-if="$store.app.isKeyboardOpen">
+            <div class="xbox-kb-wrapper">
+                
+                <div class="kb-top-label" x-text="$store.app.keyboardMode === 'add_friend_xuid' ? ($store.app.t('guide.enter_xuid') || 'Enter Friend XUID (16 Characters)') : ($store.app.t('guide.enter_name') || 'Enter Friend Name')"></div>
+                
+                <div class="xbox-kb-input-row">
+                    <input type="text" class="xbox-kb-input" 
+                        :value="$store.app.keyboardMode === 'add_friend_xuid' ? $store.app.friendInputXuid : $store.app.friendInputName" readonly>
+                    <div class="input-cursor" id="kb-cursor-indicator"></div>
+                </div>
+                
+                <div class="xbox-kb-main-body">
+                    <div class="kb-col side-col left">
+                        <div class="side-btn" @click="$store.actions.moveTextCursor(-1)"><div class="btn-icon-visual lb-shape">◀ LB</div><span class="btn-label" x-text="$store.app.t('generic.left') || 'Left'"></span></div>
+                        <div class="side-btn" :class="{'active-state': $store.app.isSymbols}" @click="$store.actions.handleKeyboardSpecial('SYMBOLS')"><div class="btn-icon-visual lt-shape">LT</div><span class="btn-label" x-text="$store.app.t('generic.symbols') || 'Symbols'"></span></div>
+                        <div class="side-btn" :class="{'active-state': $store.app.isCaps}" @click="$store.actions.handleKeyboardSpecial('CAPS')"><div class="btn-icon-visual stick-shape">L3</div><span class="btn-label" x-text="$store.app.t('generic.caps') || 'Caps'"></span></div>
+                    </div>
+                    <div class="kb-col center-col">
+                        <div class="keys-grid-tight">
+                            <template x-for="(row, rIndex) in $store.app.currentKeys" :key="rIndex">
+                                <div class="keys-row-tight">
+                                    <template x-for="(key, cIndex) in row" :key="cIndex">
+                                        <div class="xbox-key-tight" :class="{'focused': $store.app.keyboardRow === rIndex && $store.app.keyboardCol === cIndex}" @click="$store.app.keyboardRow = rIndex; $store.app.keyboardCol = cIndex; $store.actions.pressKeyboardKey()">
+                                            <span x-text="key"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="bottom-actions-row">
+                            <div class="wide-action-btn" @click="$store.actions.handleKeyboardSpecial('BACKSPACE')"><div class="circle-icon blue">X</div><span x-text="$store.app.t('generic.backspace') || 'Backspace'"></span></div>
+                            <div class="wide-action-btn" @click="$store.actions.handleKeyboardSpecial('SPACE')"><div class="circle-icon yellow">Y</div><span x-text="$store.app.t('generic.space') || 'Space'"></span></div>
+                        </div>
+                    </div>
+                    <div class="kb-col side-col right">
+                        <div class="side-btn" @click="$store.actions.moveTextCursor(1)"><div class="btn-icon-visual rb-shape">RB ▶</div><span class="btn-label" x-text="$store.app.t('generic.right') || 'Right'"></span></div>
+                        <div class="side-btn" :class="{'active-state': $store.app.isAccents}" @click="$store.actions.handleKeyboardSpecial('ACCENTS')"><div class="btn-icon-visual rt-shape">RT</div><span class="btn-label" x-text="$store.app.t('generic.accents') || 'Accents'"></span></div>
+                        <div class="done-btn-container" @click="$store.actions.handleKeyboardSpecial('DONE')"><div class="play-icon-circle">▶</div><span x-text="$store.app.t('generic.done') || 'Done'"></span></div>
+                    </div>
+                </div>
+                <div class="kb-black-footer">
+                    <div class="footer-item"><div class="circle-icon green-small">A</div> <span x-text="$store.app.t('generic.select') || 'Select'"></span></div>
+                    
+                    <div class="footer-item" @click="$store.app.isKeyboardOpen = false"><div class="circle-icon red-small">B</div> <span x-text="$store.app.t('generic.cancel') || 'Cancel'"></span></div>
+                </div>
+            </div>
+        </template>
+
+    </div>
+
+</body>
+</html>
