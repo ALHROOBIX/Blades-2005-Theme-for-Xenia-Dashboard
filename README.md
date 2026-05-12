@@ -38,6 +38,8 @@ This project is an authentic, fan-made recreation of the classic 2005 Xbox 360 B
 
 ## 🕹️ Controls | التحكم
 
+<div align="center">
+
 | Action | Keyboard | Gamepad | الإجراء بالعربية |
 | :--- | :--- | :--- | ---: |
 | **Navigate** | `Arrows` | `D-Pad` / `L-Stick` | <div dir="rtl">التنقل بين العناصر</div> |
@@ -48,6 +50,8 @@ This project is an authentic, fan-made recreation of the classic 2005 Xbox 360 B
 | **Patches / Delete**| `X` | `X` | <div dir="rtl">الباتشات / حذف</div> |
 | **Open Guide** | `Tab` | `LB + Start` | <div dir="rtl">فتح دليل الإكس بوكس (Guide)</div> |
 | **Virtual Keyboard**| `R3` | `R3` (Thumbstick) | <div dir="rtl">فتح الكيبورد الافتراضي للبحث</div> |
+
+</div>
 
 <br/>
 
