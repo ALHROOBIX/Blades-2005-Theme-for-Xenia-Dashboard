@@ -79,8 +79,10 @@ body {
     width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
     color: #fff; font-weight: bold; font-size: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
-.btn-bubble.btn-a { background: #57E610; color: #000; }
-.btn-bubble.btn-b { background: #DB1F1F; color: #fff; }
+.btn-bubble.btn-a { background: var(--nxe-btn-a); color: #000; }
+.btn-bubble.btn-b { background: var(--nxe-btn-b); color: #fff; }
+.btn-bubble.btn-x { background: var(--nxe-btn-x); color: #fff; }
+.btn-bubble.btn-y { background: var(--nxe-btn-y); color: #000; }
 
 .nxe-blades-container { display: flex; flex-direction: row; width: 100%; height: 100%; background: transparent; box-shadow: none; overflow: visible; }
 .nxe-blade { display: flex; flex-direction: row; height: 100%; position: relative; z-index: 1; margin-left: -65px; transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -598,8 +600,6 @@ body::after {
 .content-box.focused { border-color: #fff; transform: scale(1.03); z-index: 5; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
 
 
-
-
 .layout-home, .layout-games, .layout-settings {
     display: flex; 
     flex-direction: column; 
@@ -613,7 +613,7 @@ body::after {
 
 .home-top-section { display: flex; gap: 12px; flex: 1; min-height: 0; }
 
-.home-col-left, .games-col-left, .settings-col-left { 
+.home-col-left, .games-col-left { 
     display: flex; flex-direction: column; 
     width: 34%; 
     max-width: 400px; 
@@ -1032,9 +1032,14 @@ body::after {
 .config-option {
     background: #f9f9f9 !important;
     border: 1px solid #eeeeee !important;
-    color: #000000 !important;
     border-radius: 4px !important;
-    transition: all 0.15s ease-out !important;
+    padding: 12px 20px !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    color: #000000 !important; 
+    transition: all 0.15s ease-out !important; 
 }
 .config-option.focused {
     background: #ffffff !important;
@@ -1051,11 +1056,11 @@ body::after {
 .patch-status-text { color: #111; font-weight: bold; margin-left: 15px; }
 
 .nxe-config-input {
-    background: #ffffff;
-    border: 2px solid #ddd;
-    color: #111;
-    padding: 6px 12px;
-    border-radius: 4px;
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #cccccc !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
     font-weight: bold;
     font-size: 14px;
     width: 180px;
@@ -1310,9 +1315,10 @@ body::after {
     width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
     color: #fff; font-size: 12px; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
-.icon.a { background: #59c853; }
-.icon.b { background: #e5443a; }
-.icon.x { background: #3a82e5; }
+.icon.a { background: var(--nxe-btn-a); }
+.icon.b { background: var(--nxe-btn-b); }
+.icon.x { background: var(--nxe-btn-x); }
+.icon.y { background: var(--nxe-btn-y); color: #333; }
 .provider-logo { font-size: 14px; color: #555; font-weight: bold;}
 .provider-logo b { color: #111; }
 
@@ -1504,32 +1510,6 @@ body::after {
 
 .nxe-settings-description [style*="color:"] {
     color: #000000 !important;
-}
-
-
-.config-option {
-    background: #f9f9f9 !important;
-    border: 1px solid #eeeeee !important;
-    border-radius: 4px !important;
-    padding: 12px 20px !important;
-    margin-bottom: 8px !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-}
-.config-option.focused {
-    background: #ffffff !important;
-    border: 2px solid #000000 !important;
-    transform: scale(1.02) !important;
-    box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important; 
-}
-
-.nxe-config-input {
-    background: #ffffff !important;
-    color: #000000 !important;
-    border: 2px solid #cccccc !important;
-    border-radius: 4px !important;
-    padding: 6px 12px !important;
 }
 
 .nxe-toggle-switch .slider {
