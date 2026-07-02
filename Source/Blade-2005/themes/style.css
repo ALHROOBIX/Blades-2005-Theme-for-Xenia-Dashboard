@@ -4,9 +4,9 @@
 }
 
 :root {
-    --nxe-brand-primary: #107c10; 
-    --nxe-brand-light: #1bad1b; 
-    --nxe-brand-dark: #0b530b;  
+    --nxe-brand-primary: #107c1000!important; 
+    --nxe-brand-light: #1bad1b00!important; 
+    --nxe-brand-dark: #0b530b00!important;  
     
     --nxe-bg-top: #5f5f5f;
     --nxe-bg-bottom: #3a3a3a;
@@ -1522,10 +1522,15 @@ body::after {
 }
 
 
-.nxe-footer-left .footer-button,
-.nxe-footer-left .footer-button span {
+.nxe-footer-left .footer-button{
     color: #000000 !important;
-    text-shadow: none !important; 
+    text-shadow: none !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 4px rgba(0, 0, 0, 0.5) !important;
+}
+.nxe-footer-left .footer-button span {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgb(0, 0, 0), 0 0 4px rgba(0, 0, 0, 0.5) !important;
+ 
 }
 .nxe-footer-left .button-icon {
     background-color: #ffffff !important;

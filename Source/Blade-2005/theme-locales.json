@@ -19,7 +19,15 @@
       "Settings-Theme_title": "Themes Settings",
       "Settings-Wellpaper_title": "Wallpaper Settings",
       "Settings-Sound_title": "Sound Settings",
-      "Settings-Language_title": "Language"
+      "Settings-Language_title": "Language",
+      "Settings-content_title": "SYSTEM CONTENT",
+      "Settings-Core_desc": "Manage core system and emulator settings",
+      "Settings-Color_desc": "Customize the user interface colors",
+      "Settings-Theme_desc": "Switch and customize theme appearance",
+      "Settings-Wellpaper_desc": "Change backgrounds for different screens",
+      "Settings-Sound_desc": "Control volume and sound effects",
+      "Settings-Language_desc": "Change the system interface language",
+      "Settings-content_desc": "Manage additional content, updates, and saves"
     },
     "guide": {
       "home": "HOME",
@@ -69,7 +77,15 @@
       "Settings-Theme_title": "إعدادات الثيمات",
       "Settings-Wellpaper_title": "إعدادات الخلفية",
       "Settings-Sound_title": "إعدادات الصوت",
-      "Settings-Language_title": "اللغة"
+      "Settings-Language_title": "اللغة",
+      "Settings-content_title": "محتوى النظام",
+      "Settings-Core_desc": "إدارة إعدادات النظام الأساسية والمحاكيات",
+      "Settings-Color_desc": "تخصيص ألوان واجهة المستخدم",
+      "Settings-Theme_desc": "تبديل ومخصص مظهر الثيم",
+      "Settings-Wellpaper_desc": "تغيير الخلفيات للشاشات المختلفة",
+      "Settings-Sound_desc": "تحكم في مستوى الصوت وتأثيرات الصوت",
+      "Settings-Language_desc": "تغيير لغة واجهة النظام",
+      "Settings-content_desc": "إدارة المحتوى الإضافي والتحديثات والحفظ"
     },
     "guide": {
       "home": "الرئيسية",
@@ -119,7 +135,15 @@
       "Settings-Theme_title": "主题设置",
       "Settings-Wellpaper_title": "壁纸设置",
       "Settings-Sound_title": "声音设置",
-      "Settings-Language_title": "语言"
+      "Settings-Language_title": "语言",
+      "Settings-content_title": "系统内容",
+      "Settings-Core_desc": "管理核心系统和模拟器设置",
+      "Settings-Color_desc": "自定义用户界面颜色",
+      "Settings-Theme_desc": "切换和自定义主题外观",
+      "Settings-Wellpaper_desc": "为不同的屏幕更改背景",
+      "Settings-Sound_desc": "控制音量和音效",
+      "Settings-Language_desc": "更改系统界面语言",
+      "Settings-content_desc": "管理额外的内容、更新和保存"
     },
     "guide": {
       "home": "主页",
@@ -169,7 +193,15 @@
       "Settings-Theme_title": "テーマ設定",
       "Settings-Wellpaper_title": "壁紙設定",
       "Settings-Sound_title": "サウンド設定",
-      "Settings-Language_title": "言語"
+      "Settings-Language_title": "言語",
+      "Settings-content_title": "システムコンテンツ",
+      "Settings-Core_desc": "コアシステムとシミュレータの設定を管理します",
+      "Settings-Color_desc": "ユーザーインターフェースの色をカスタマイズします",
+      "Settings-Theme_desc": "テーマの切り替えとカスタマイズを行います",
+      "Settings-Wellpaper_desc": "異なる画面で背景を変更します",
+      "Settings-Sound_desc": "音量と音效の制御を行います",
+      "Settings-Language_desc": "システムインターフェースの言語を変更します",
+      "Settings-content_desc": "追加コンテンツ、更新、保存を管理します"
     },
     "guide": {
       "home": "ホーム",
@@ -219,7 +251,15 @@
       "Settings-Theme_title": "테마 설정",
       "Settings-Wellpaper_title": "배경화면 설정",
       "Settings-Sound_title": "사운드 설정",
-      "Settings-Language_title": "언어"
+      "Settings-Language_title": "언어",
+      "Settings-content_title": "시스템 콘텐츠",
+      "Settings-Core_desc": "핵심 시스템 및 에뮬레이터 설정 관리",
+      "Settings-Color_desc": "사용자 인터페이스 색상 커스터마이징",
+      "Settings-Theme_desc": "테마 전환 및 커스터마이징",
+      "Settings-Wellpaper_desc": "다른 화면에 따른 배경 변경",
+      "Settings-Sound_desc": "볼륨 및 사운드 효과 제어",
+      "Settings-Language_desc": "시스템 인터페이스 언어 변경",
+      "Settings-content_desc": "추가 콘텐츠, 업데이트, 저장 관리"
     },
     "guide": {
       "home": "홈",
@@ -269,7 +309,15 @@
       "Settings-Theme_title": "Настройки тем",
       "Settings-Wellpaper_title": "Настройки обоев",
       "Settings-Sound_title": "Настройки звука",
-      "Settings-Language_title": "Язык"
+      "Settings-Language_title": "Язык",
+      "Settings-content_title": "Содержание системы",
+      "Settings-Core_desc": "Управление основными настройками системы и эмулятора",
+      "Settings-Color_desc": "Настройка цвета пользовательского интерфейса",
+      "Settings-Theme_desc": "Переключение и настройка внешнего вида темы",
+      "Settings-Wellpaper_desc": "Изменение фона для разных экранов",
+      "Settings-Sound_desc": "Управление громкостью и звуковыми эффектами",
+      "Settings-Language_desc": "Установка языка интерфейса системы",
+      "Settings-content_desc": "Управление дополнительным контентом, обновлениями и сохранениями"
     },
     "guide": {
       "home": "ГЛАВНАЯ",
@@ -319,7 +367,15 @@
       "Settings-Theme_title": "Themen-Einstellungen",
       "Settings-Wellpaper_title": "Hintergrund-Einstellungen",
       "Settings-Sound_title": "Toneinstellungen",
-      "Settings-Language_title": "Sprache"
+      "Settings-Language_title": "Sprache",
+      "Settings-content_title": "SYSTEMINHALT",
+      "Settings-Core_desc": "Verwalten Sie die Kernsystem- und Emulator-Einstellungen",
+      "Settings-Color_desc": "Passen Sie die Farben der Benutzeroberfläche an",
+      "Settings-Theme_desc": "Wechseln und passen Sie das Erscheinungsbild des Themas an",
+      "Settings-Wellpaper_desc": "Ändern Sie die Hintergrundbilder für verschiedene Bildschirmbereiche",
+      "Settings-Sound_desc": "Steuern Sie die Lautstärke und Soundeffekte",
+      "Settings-Language_desc": "Ändern Sie die Sprache der Systemoberfläche",
+      "Settings-content_desc": "Verwalten Sie zusätzliche Inhalte, Updates und Speicherstände"
     },
     "guide": {
       "home": "START",
@@ -369,7 +425,15 @@
       "Settings-Theme_title": "Configurações de Tema",
       "Settings-Wellpaper_title": "Configurações de Papel de Parede",
       "Settings-Sound_title": "Configurações de Som",
-      "Settings-Language_title": "Idioma"
+      "Settings-Language_title": "Idioma",
+      "Settings-content_title": "CONTEÚDO DO SISTEMA",
+      "Settings-Core_desc": "Gerenciar configurações principais do sistema e simulador",
+      "Settings-Color_desc": "Configurar cores da interface do usuário",
+      "Settings-Theme_desc": "Alternar e personalizar a aparência do tema",
+      "Settings-Wellpaper_desc": "Alterar planos de fundo para diferentes telas",
+      "Settings-Sound_desc": "Controlar volume e efeitos sonoros",
+      "Settings-Language_desc": "Alterar o idioma da interface do sistema",
+      "Settings-content_desc": "Gerenciar conteúdo adicional, atualizações e salvamentos"
     },
     "guide": {
       "home": "INÍCIO",
@@ -419,7 +483,15 @@
       "Settings-Theme_title": "Configuración de Temas",
       "Settings-Wellpaper_title": "Configuración de Fondo",
       "Settings-Sound_title": "Configuración de Sonido",
-      "Settings-Language_title": "Idioma"
+      "Settings-Language_title": "Idioma",
+      "Settings-content_title": "CONTENIDO DEL SISTEMA",
+      "Settings-Core_desc": "Gestión de configuración principal del sistema y simulador",
+      "Settings-Color_desc": "Configuración de colores de la interfaz de usuario",
+      "Settings-Theme_desc": "Cambiar y personalizar el aspecto del tema",
+      "Settings-Wellpaper_desc": "Cambiar el fondo para diferentes pantallas",
+      "Settings-Sound_desc": "Controlar el volumen y efectos de sonido",
+      "Settings-Language_desc": "Cambiar el idioma de la interfaz del sistema",
+      "Settings-content_desc": "Gestión de contenido adicional, actualizaciones y restauraciones"
     },
     "guide": {
       "home": "INICIO",
@@ -469,7 +541,15 @@
       "Settings-Theme_title": "Tema Ayarları",
       "Settings-Wellpaper_title": "Duvar Kağıdı Ayarları",
       "Settings-Sound_title": "Ses Ayarları",
-      "Settings-Language_title": "Dil"
+      "Settings-Language_title": "Dil",
+      "Settings-content_title": "SİSTEM İÇERİĞİ",
+      "Settings-Core_desc": "Temel sistem ve emülatör ayarlarını yönetin",
+      "Settings-Color_desc": "Kullanıcı arayüzü renklerini özelleştirin",
+      "Settings-Theme_desc": "Tema görünümünü değiştirin ve özelleştirin",
+      "Settings-Wellpaper_desc": "Farklı ekranlar için arka planları değiştirin",
+      "Settings-Sound_desc": "Ses düzeyini ve ses efektlerini kontrol edin",
+      "Settings-Language_desc": "Sistem arayüzü dilini değiştirin",
+      "Settings-content_desc": "Ek içerikleri, güncellemeleri ve kayıtları yönetin"
     },
     "guide": {
       "home": "ANA SAYFA",
@@ -519,7 +599,15 @@
       "Settings-Theme_title": "Impostazioni Tema",
       "Settings-Wellpaper_title": "Sfondo",
       "Settings-Sound_title": "Impostazioni Audio",
-      "Settings-Language_title": "Lingua"
+      "Settings-Language_title": "Lingua",
+      "Settings-content_title": "CONTENUTO DEL SISTEMA",
+      "Settings-Core_desc": "Gestisci le impostazioni di base del sistema e dell'emulatore",
+      "Settings-Color_desc": "Personalizza i colori dell'interfaccia utente",
+      "Settings-Theme_desc": "Cambia e personalizza l'aspetto del tema",
+      "Settings-Wellpaper_desc": "Cambia gli sfondi per le diverse schermate",
+      "Settings-Sound_desc": "Controlla il volume e gli effetti sonori",
+      "Settings-Language_desc": "Cambia la lingua dell'interfaccia di sistema",
+      "Settings-content_desc": "Gestisci contenuti aggiuntivi, aggiornamenti e salvataggi"
     },
     "guide": {
       "home": "HOME",
@@ -569,7 +657,15 @@
       "Settings-Theme_title": "Paramètres du Thème",
       "Settings-Wellpaper_title": "Paramètres du Fond d'écran",
       "Settings-Sound_title": "Paramètres Audio",
-      "Settings-Language_title": "Langue"
+      "Settings-Language_title": "Langue",
+      "Settings-content_title": "CONTENU DU SYSTÈME",
+      "Settings-Core_desc": "Gérer les paramètres principaux du système et de l'émulateur",
+      "Settings-Color_desc": "Personnaliser les couleurs de l'interface utilisateur",
+      "Settings-Theme_desc": "Changer et personnaliser l'apparence du thème",
+      "Settings-Wellpaper_desc": "Changer les fonds d'écran pour différents écrans",
+      "Settings-Sound_desc": "Contrôler le volume et les effets sonores",
+      "Settings-Language_desc": "Changer la langue de l'interface du système",
+      "Settings-content_desc": "Gérer le contenu supplémentaire, les mises à jour et les sauvegardes"
     },
     "guide": {
       "home": "ACCUEIL",

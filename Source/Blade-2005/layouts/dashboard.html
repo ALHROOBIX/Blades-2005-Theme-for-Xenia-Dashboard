@@ -179,17 +179,16 @@
                                                 <template x-if="item.icon">
                                                     <img :src="item.icon" class="list-icon">
                                                 </template>
-                                                <span x-text="tab.id === 'settings' ? ($store.app.t('settings.' + $store.app.settingsMenu[dIndex]?.id + '_title') || item.name) : ($store.app.t('about.' + item.id) || item.name)"></span>
+                                                <span x-text="tab.id === 'settings' ? ($store.app.t('settings.' + item.id + '_title') || item.name) : ($store.app.t('about.' + item.id) || item.name)"></span>
                                             </li>
                                         </template>
                                     </ul>
                                 </div>
                                 <div class="settings-col-right">
                                     <div class="description-box">
-                                        <h2 x-text="tab.id === 'settings' ? $store.app.t('settings.' + $store.app.settingsMenu[$store.app.detailIndex]?.id + '_title') : ($store.app.t('dashboard_menu.about') || 'ABOUT SYSTEM')"></h2>
-                                        
+                                        <h2 x-text="tab.id === 'settings' ? $store.app.t('settings.' + $store.app.detailMenu[$store.app.detailIndex]?.id + '_title') : ($store.app.t('dashboard_menu.about') || 'ABOUT SYSTEM')"></h2>
                                         <template x-if="tab.id === 'settings'">
-                                            <p x-text="$store.app.t('settings.' + $store.app.settingsMenu[$store.app.detailIndex]?.id + '_desc')"></p>
+                                           <p x-text="$store.app.t('settings.' + $store.app.detailMenu[$store.app.detailIndex]?.id + '_desc') || ''"></p>
                                         </template>
 
                                         <template x-if="tab.id === 'about'">
@@ -202,7 +201,7 @@
                                                 x-text="$store.app.t('about.theme_desc')"></p>
                                                 
                                                 <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.15); display: flex; gap: 30px; font-size: 14px; color: #aaaaaa;">
-                                                    <div><strong style="color:#ffffff;" x-text="$store.app.t('about.ui_version')"></strong> 1.0.2 Stable</div>
+                                                    <div><strong style="color:#ffffff;" x-text="$store.app.t('about.ui_version')"></strong> 1.0.3 Stable</div>
                                                     <div><strong style="color:#ffffff;" x-text="$store.app.t('about.system')"></strong> Xenia Emulator</div>
                                                 </div>
 

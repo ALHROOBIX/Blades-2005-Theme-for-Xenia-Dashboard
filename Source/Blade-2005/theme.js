@@ -493,14 +493,15 @@ document.addEventListener('keydown', (e) => {
                 1: { up: 0, down: 0, left: 1, right: 1 }   
             };
         } else if (currentTab === 'settings') {
-            navMap = {
-                0: { up: 4, down: 1 },  
-                1: { up: 0, down: 2 },  
-                2: { up: 1, down: 3 },  
-                3: { up: 2, down: 4 },  
-                4: { up: 3, down: 0 }   
-            };
-        }
+                navMap = {
+                    0: { up: 5, down: 1 },  
+                    1: { up: 0, down: 2 },  
+                    2: { up: 1, down: 3 },  
+                    3: { up: 2, down: 4 },  
+                    4: { up: 3, down: 5 },  
+                    5: { up: 4, down: 0 }   
+                };
+            }
 
         const currentIndex = app.detailIndex;
         const nextIndex = navMap[currentIndex]?.[direction];
@@ -518,6 +519,19 @@ document.addEventListener('keydown', (e) => {
         const app = Alpine.store('app');
 
         app.settingsMenu = app.settingsMenu.filter(item => item.id !== 'colors');
+        
+        const systemContentItem = {
+            id: 'Settings-content',          
+            name: 'System Content',          
+            view: 'settings-content',        
+            icon: 'assets/icons/content.webp' 
+        };
+
+        
+        const alreadyExists = app.settingsMenu.some(item => item.id === 'Settings-content');
+        if (!alreadyExists) {
+            app.settingsMenu.push(systemContentItem);
+        }
         const metroMenuData = [
             {
             "id": "home",
@@ -543,7 +557,8 @@ document.addEventListener('keydown', (e) => {
                 { "id": "Settings-Theme", "name": "Themes Settings", "view": "settings-system", "icon": "/assets/icons/System Settings.png" },
                 { "id": "Settings-Wellpaper", "name": "Wellpaper Settings", "view": "settings-display", "icon": "/assets/icons/wallpaper_settings.png" },
                 { "id": "Settings-Sound", "name": "Sound Settings", "view": "settings-audio", "icon": "/assets/icons/Sound.png" },
-                { "id": "Settings-Language", "name": "Language", "view": "language-select", "icon": "/assets/icons/earth.png" }
+                { "id": "Settings-Language", "name": "Language", "view": "language-select", "icon": "/assets/icons/earth.png" },
+                { "id": "Settings-content", "name": "SYSTEM CONTENT", "view": "settings-content", "icon": "assets/icons/content.webp" }
             ] 
             },
             {
