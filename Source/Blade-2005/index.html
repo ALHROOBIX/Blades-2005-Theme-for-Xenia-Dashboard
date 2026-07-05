@@ -121,7 +121,10 @@
                                 <span x-text="$store.app.playerTag || 'Player Name'"></span> 
                                 <span class="nxe-score" x-text="$store.app.gamerscore || 0"></span>
                             </div>
-                            <div class="nxe-player-status">Status <span class="nxe-status-text">Online</span></div>
+                            <div class="nxe-player-status">
+                                Status
+                                <span class="nxe-status-text" x-text="($store.app.settings.xeniaPath || '').toLowerCase().includes('netplay') ? ($store.app.t('dashboard_menu.online') || 'Online') : ($store.app.t('dashboard_menu.offline') || 'Offline')"></span>
+                            </div>
                         </div>
                     </div>
 
