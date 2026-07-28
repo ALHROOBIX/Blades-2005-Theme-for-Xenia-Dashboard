@@ -44,8 +44,19 @@
             </nav>
                     
             <div class="nxe-settings-description config-editor-options" style="padding: 20px;">
-                <div x-show="$store.app.isContentLoading && !$store.app.showXboxInstallNotify" style="text-align: center; color: #555; font-size: 1.2rem; font-weight: bold; margin-top: 20px;">
-                    <span x-text="$store.app.t('generic.loading')"></span>
+                <div x-show="$store.app.isContentLoading && !$store.app.showXboxInstallNotify" style="text-align: center; margin-top: 20px;">
+                    <template x-if="$store.app.downloadStatuses.systemContent.status !== 'idle'">
+                        <div style="width: 70%; margin: 0 auto; background: #f4f4f4; border-radius: 8px; padding: 15px; border: 1px solid #cccccc; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+                            <h3 style="color: #000000; margin: 0 0 10px 0; font-size: 1.1rem; letter-spacing: 1px;" x-text="$store.app.downloadStatuses.systemContent.status"></h3>
+                            <div style="width: 100%; background: #e0e0e0; border-radius: 10px; height: 12px; overflow: hidden; border: 1px solid #bbbbbb;">
+                                <div style="height: 100%; background: #107c10; transition: width 0.2s ease-out;"
+                                    :style="{ width: $store.app.downloadStatuses.systemContent.percentage + '%' }"></div>
+                            </div>
+                        </div>
+                    </template>
+                    <template x-if="$store.app.downloadStatuses.systemContent.status === 'idle'">
+                        <span style="color: #555555; font-size: 1.2rem; font-weight: bold;" x-text="$store.app.t('generic.loading') || 'Loading...'"></span>
+                    </template>
                 </div>
 
                 <div x-show="!$store.app.isContentLoading && !$store.app.showXboxInstallNotify && $store.app.contentItems.length === 0" style="text-align: center; color: #666; margin-top: 20px;">
