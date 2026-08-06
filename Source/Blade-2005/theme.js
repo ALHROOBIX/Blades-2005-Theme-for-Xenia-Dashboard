@@ -296,11 +296,20 @@ hooks.on('onAppReady', async () => {
         };
         
 
+        
         const originalSelectFocusedItem = actions.selectFocusedItem;
         actions.selectFocusedItem = function() {
             const app = Alpine.store('app');
             if (app.focusedCollection === 'filteredLibraryGames' || app.focusedCollection === 'gamesList') {
                 const item = app[app.focusedCollection][app.focusedIndex];
+                
+                
+                if (item && item.discs && item.discs.length > 1) {
+                    originalSelectFocusedItem.call(this);
+                    return; 
+                }
+
+                
                 if (item && item.path && !app.gameSelectionAnimating) {
                     app.gameSelectionAnimating = true;
                     app.selectedGame = item;
@@ -309,7 +318,6 @@ hooks.on('onAppReady', async () => {
                     setTimeout(() => {
                         this.goBack(); 
                         setTimeout(() => {
-                            
                             app.masterIndex = 0; 
                             actions.updateDetailMenu(); 
                             app.detailIndex = 0; 
@@ -322,6 +330,44 @@ hooks.on('onAppReady', async () => {
             }
             originalSelectFocusedItem.call(this);
         };
+
+        
+        actions.launchSelectedDisc = function() {
+            const app = Alpine.store('app');
+            const item = app.discSelectorGame;
+            const selectedDisc = item.discs[app.discSelectorIndex];
+
+            
+            app.isDiscSelectorOpen = false;
+
+            if (item && selectedDisc && !app.gameSelectionAnimating) {
+                app.gameSelectionAnimating = true;
+                
+                
+                app.selectedGame = {
+                    ...item,
+                    path: selectedDisc.path,
+                    fileName: selectedDisc.fileName,
+                    discs: null 
+                };
+                
+                this.playSound('select');
+                
+                
+                setTimeout(() => {
+                    this.goBack(); 
+                    setTimeout(() => {
+                        app.masterIndex = 0; 
+                        actions.updateDetailMenu(); 
+                        app.detailIndex = 0; 
+                        app.focusedList = 'detail';
+                        app.gameSelectionAnimating = false;
+                    }, 800);
+                }, 500);
+            }
+        };
+
+        
         const originalSelectDetailItem = actions.selectDetailItem;
         actions.selectDetailItem = function() {
             const app = Alpine.store('app');
