@@ -183,7 +183,160 @@
     </div>
 </div>
 
+    <div class="disc-selector-overlay" x-show="$store.app.isDiscSelectorOpen" x-transition.opacity style="display: none;">
+        <div class="disc-selector-box">
+            <div class="disc-selector-header">
+                <h3 x-text="$store.app.t('library.select_disc') || 'Select Disc'">Select Disc</h3>
+                <span x-text="$store.app.discSelectorGame?.discs?.length + ' Discs'"></span>
+            </div>
+
+            <div class="disc-selector-list custom-scrollbar">
+                <template x-for="(disc, index) in $store.app.discSelectorGame?.discs" :key="index">
+                    <div
+                        class="disc-file-item"
+                        :class="{'focused': $store.app.discSelectorIndex === index}"
+                        @click="$store.app.discSelectorIndex = index; $store.actions.launchSelectedDisc()"
+                    >
+                        <span class="file-name" x-text="disc.fileName"></span>
+                    </div>
+                </template>
+            </div>
+
+            <div class="disc-selector-footer">
+                <div><span class="friend-btn-icon a">A</span> <span x-text="$store.app.t('generic.select') || 'Launch'">Launch</span></div>
+                <div><span class="friend-btn-icon b">B</span> <span x-text="$store.app.t('generic.cancel') || 'Cancel'">Cancel</span></div>
+            </div>
+        </div>
+    </div>
+
 <style>
+    
+        .disc-selector-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.7); 
+            backdrop-filter: blur(8px);
+            z-index: 99999; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .disc-selector-box {
+            width: max-content !important; 
+            min-width: 600px !important; 
+            max-width: 95vw !important; 
+            background: #ffffff; 
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            direction: ltr;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            transform: scale(0.95);
+            animation: discPopIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes discPopIn { to { transform: scale(1); } }
+
+        .disc-selector-header {
+            background: #f4f4f4; 
+            padding: 20px 25px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .disc-selector-header h3 {
+            margin: 0; color: #111; font-size: 24px; font-weight: 800; text-transform: uppercase; text-shadow: none;
+        }
+
+        .disc-selector-header span {
+            color: #107c10; 
+            font-size: 15px; font-weight: 900;
+        }
+
+        .disc-selector-list {
+            padding: 15px;
+            max-height: 350px;
+            overflow-y: auto;
+            background: #ffffff;
+        }
+
+        .disc-file-item {
+            padding: 18px 20px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fafafa; 
+            border: 1px solid #eee;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.15s ease-out;
+            font-weight: 700;
+        }
+
+        
+        .disc-file-item.focused {
+            background: #107c10;
+            color: #ffffff;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(16, 124, 16, 0.4);
+            border: 2px solid #000000; 
+            z-index: 10;
+        }
+
+        .disc-file-item .file-name {
+            flex: 1;
+            font-size: 16px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-icon {
+            font-size: 20px;
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .disc-file-item.focused .file-icon {
+            opacity: 1;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            animation: spinRing 2s linear infinite; 
+        }
+
+        .disc-selector-footer {
+            padding: 15px 25px;
+            background: #f9f9f9; 
+            display: flex;
+            gap: 30px;
+            justify-content: flex-end;
+            border-top: 1px solid #eee;
+        }
+
+        .disc-selector-footer div {
+            display: flex; align-items: center; gap: 8px; font-size: 14px; color: #111; font-weight: bold; text-transform: uppercase;
+        }
+
+        
+        .disc-selector-footer .friend-btn-icon {
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: bold; font-size: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .disc-selector-footer .friend-btn-icon.a { background: #59c853; }
+        .disc-selector-footer .friend-btn-icon.b { background: #e5443a; }
     
     .shutdown-crt {
         position: fixed;
