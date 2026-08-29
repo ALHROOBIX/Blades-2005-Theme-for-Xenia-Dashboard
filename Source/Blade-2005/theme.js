@@ -57,12 +57,46 @@ hooks.on('onAppReady', async () => {
 
         
         actions.changeTabBg = async function(bgKey) {
+            
+            this.openGallery(bgKey);
+        };
+
+        
+        const originalSelectGalleryImage = actions.selectGalleryImage;
+        actions.selectGalleryImage = async function() {
             const app = Alpine.store('app');
-            const filePath = await window.electronAPI.openImageFile();
-            if (filePath) {
-                await this._saveDisplaySetting('user' + bgKey, bgKey, filePath);
-                app.displaySettings[bgKey] = filePath;
-                this.playSound('channelUp');
+            
+            
+            const bgKeys = ['homeBg', 'gamesBg', 'settingsBg', 'aboutBg'];
+            
+            
+            if (bgKeys.includes(app.galleryType)) {
+                const selected = app.galleryImages[app.galleryIndex];
+                if (!selected) return;
+
+                let filePath = selected.path;
+
+                
+                if (selected.id === 'browse') {
+                    filePath = await window.electronAPI.openImageFile();
+                    if (!filePath) return; 
+                }
+
+                this.playSound('select');
+                
+                
+                await this._saveDisplaySetting('user' + app.galleryType, app.galleryType, filePath);
+                app.displaySettings[app.galleryType] = filePath;
+                
+                
+                app.isGalleryOpen = false; 
+                
+                return; 
+            }
+
+            
+            if (originalSelectGalleryImage) {
+                return originalSelectGalleryImage.call(this);
             }
         };
 
@@ -332,7 +366,6 @@ hooks.on('onAppReady', async () => {
         };
 
         
-        
         actions.launchSelectedDisc = function() {
             const app = Alpine.store('app');
             const item = app.discSelectorGame;
@@ -422,7 +455,7 @@ hooks.on('onAppReady', async () => {
     if (app.currentView === 'dashboard') {
         
         
-        if (app.isKeyboardOpen || app.isProfileSelectorOpen || app.isGuideOpen || app.showGameInfoOverlay || app.isFriendsOverlayOpen || app.isDiscSelectorOpen) {
+        if (app.isKeyboardOpen || app.isProfileSelectorOpen || app.isGuideOpen || app.showGameInfoOverlay || app.isFriendsOverlayOpen || app.isDiscSelectorOpen || app.isGalleryOpen) {
             return;
         }
 
@@ -494,7 +527,7 @@ hooks.on('onAppReady', async () => {
 document.addEventListener('keydown', (e) => {
     if (app.currentView !== 'dashboard') return;
     
-    if (app.isKeyboardOpen || app.isProfileSelectorOpen || app.isGuideOpen || app.showGameInfoOverlay || app.isFriendsOverlayOpen || app.isDiscSelectorOpen) return;
+    if (app.isKeyboardOpen || app.isProfileSelectorOpen || app.isGuideOpen || app.showGameInfoOverlay || app.isFriendsOverlayOpen || app.isDiscSelectorOpen || app.isGalleryOpen) return;
 
     const key = e.key;
 
