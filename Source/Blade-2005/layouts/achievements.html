@@ -1,6 +1,15 @@
 <section class="page" id="achievements-page" x-data x-init="$store.actions.setFocusContext('achievements'); $store.actions.loadAchievementsData()">
     
-    <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/Games.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+     <div
+        id="games-wallpaper"
+        x-data
+        :style="`background-image: url('${
+            $store.app.displaySettings?.gamesBg
+            ? 'file:///' + $store.app.displaySettings.gamesBg.replace(/\\/g, '/')
+            : 'assets/images/wallpapers/Games.png'
+        }')`"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+    </div>
     <div class="global-glass-bg" style="z-index:-1;"></div>
 
     <style>

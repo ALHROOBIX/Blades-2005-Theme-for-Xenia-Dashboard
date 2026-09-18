@@ -17,9 +17,44 @@
             position: relative;
             color: #fff;
         }
+        
+        #global-wallpaper {
+            position: fixed;           
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;               
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;    
+            pointer-events: none;      
+            user-select: none;
+            transform: translateZ(0);  
+        }
+        
     </style>
 </head>
 <body>
+    <div id="global-wallpaper" x-data
+     :style="'background-image: ' + 
+        ($store.app.masterIndex === 0 
+            ? ($store.app.displaySettings?.homeBg 
+                ? `url('file:///${$store.app.displaySettings.homeBg.replace(/\\/g, '/')}')` 
+                : `url('assets/images/wallpapers/Home.png')`) 
+        : $store.app.masterIndex === 1 
+            ? ($store.app.displaySettings?.gamesBg 
+                ? `url('file:///${$store.app.displaySettings.gamesBg.replace(/\\/g, '/')}')` 
+                : `url('assets/images/wallpapers/Games.png')`)
+        : $store.app.masterIndex === 2 
+            ? ($store.app.displaySettings?.settingsBg 
+                ? `url('file:///${$store.app.displaySettings.settingsBg.replace(/\\/g, '/')}')` 
+                : `url('assets/images/wallpapers/Settings.png')`) 
+            : ($store.app.displaySettings?.aboutBg 
+                ? `url('file:///${$store.app.displaySettings.aboutBg.replace(/\\/g, '/')}')` 
+                : `url('assets/images/wallpapers/About.png')`))">
+</div>
     
     <div class="nxe-dashboard" x-data x-cloak>
         <div id="view-host" x-html="$store.app.currentViewHTML">

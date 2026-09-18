@@ -1,5 +1,14 @@
 <section class="page" id="settings-content" x-data>
-        <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/Settings.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+    <div
+        id="games-wallpaper"
+        x-data
+        :style="`background-image: url('${
+            $store.app.displaySettings?.settingsBg
+            ? 'file:///' + $store.app.displaySettings.settingsBg.replace(/\\/g, '/')
+            : 'assets/images/wallpapers/Settings.png'
+        }')`"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+    </div>
     <div class="global-glass-bg" style="z-index:-1;"></div>
     <div class="nxe-settings-wrapper">
         <h1 class="nxe-settings-title" x-text="$store.app.t('dashboard_menu.content')"></h1>

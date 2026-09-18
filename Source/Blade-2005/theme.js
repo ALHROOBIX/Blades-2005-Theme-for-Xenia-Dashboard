@@ -22,7 +22,7 @@ hooks.on('onAppReady', async () => {
     });
 
     hooks.on('onAppReady', async (data) => {
-    app.masterIndex = 0;        
+    app.masterIndex = 0;     
     app.focusedList = 'detail'; 
     actions.updateDetailMenu(); 
 
@@ -147,8 +147,10 @@ hooks.on('onAppReady', async () => {
             if (app.selectedGame && app.masterIndex === 0) { 
                 
                 let trayItem = app.detailMenu[0]; 
+                const cleanGameName = app.selectedGame.name.replace(/\s*\(.*?\)\s*/g, '').trim();
+                
                 if (trayItem) {
-                    trayItem.name = app.selectedGame.name.replace(/\s*\(.*?\)\s*/g, '').trim();
+                    trayItem.name = cleanGameName;
                     trayItem.icon = app.selectedGame.coverUrl || app.selectedGame.iconUrl;
                     trayItem.logoUrl = ''; 
                     trayItem.heroUrl = app.selectedGame.heroUrl || 'none';
@@ -171,8 +173,18 @@ hooks.on('onAppReady', async () => {
                     
                     exploreItem.heroUrl = newHero;
                     
+                    exploreItem.name = cleanGameName; 
+                    
+                    
                     app.detailMenu[1] = { ...exploreItem }; 
                 }
+            } else if (!app.selectedGame && app.masterIndex === 0) {
+                 
+                 let exploreItem = app.detailMenu[1];
+                 if(exploreItem) {
+                     exploreItem.name = "";
+                     app.detailMenu[1] = { ...exploreItem };
+                 }
             }
             
             if (app.masterIndex === 1) { 

@@ -75,11 +75,26 @@
                                     </div>
                                     <div class="home-col-right">
                                         <div class="content-box large-box" 
-                                            :class="{'focused': $store.app.detailIndex === 1 && $store.app.focusedList === 'detail'}" 
+                                            :class="{
+                                                'focused': $store.app.detailIndex === 1 &&$store.app.focusedList === 'detail',
+                                                'classic-gl-preview': $store.app.selectedGame
+                                            }" 
                                             @click="$store.app.detailIndex = 1; $store.actions.selectDetailItem()"
-                                            :style="$store.app.detailMenu[1]?.heroUrl ? `background-image: url('${$store.app.detailMenu[1].heroUrl}'); background-size: ${$store.app.detailMenu[1].heroUrl.includes('logo_home.webp') ? 'contain' : 'cover'}; background-position: center; background-repeat: no-repeat; border: none; background-color: transparent;` : ''">
+                                            :style="`padding: 0; overflow: hidden; border: none; background-color: transparent; display: flex; flex-direction: column; ${!$store.app.selectedGame ? 'box-shadow: none;' : ''}`">
                                             
-                                            <span x-show="!$store.app.detailMenu[1]?.heroUrl || $store.app.detailMenu[1]?.heroUrl.includes('logo_home.webp')" x-text="$store.app.detailMenu[1]?.name || ''"></span>
+                                            
+                                            <div class="gl-preview-title" 
+                                                 x-show="$store.app.selectedGame"
+                                                 style="width: 100%; background: rgba(0,0,0,0.75); padding: 8px 15px; border-radius: 8px 8px 0 0; flex-shrink: 0; z-index: 2; display: flex; align-items: center; justify-content: flex-start; box-sizing: border-box;">
+                                                <span style="color: #ffffff !important; font-size: 16px; font-weight: 800; text-shadow: 1px 1px 3px rgba(0,0,0,0.9); margin: 0; display: block;" 
+                                                      x-text="$store.app.detailMenu[1]?.name || ''"></span>
+                                            </div>
+                                            
+                                            
+                                            <div class="gl-preview-hero" 
+                                                :style="$store.app.detailMenu[1]?.heroUrl ? `background-image: url('${$store.app.detailMenu[1].heroUrl}'); width: 100%; flex: 1; background-size: ${$store.app.detailMenu[1].heroUrl.includes('logo_home.webp') ? 'contain' : 'cover'}; background-position: center; background-repeat: no-repeat; border-radius: ${$store.app.selectedGame ? '0 0 8px 8px' : '8px'};` : ''">
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +216,7 @@
                                                 x-text="$store.app.t('about.theme_desc')"></p>
                                                 
                                                 <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.15); display: flex; gap: 30px; font-size: 14px; color: #aaaaaa;">
-                                                    <div><strong style="color:#ffffff;" x-text="$store.app.t('about.ui_version')"></strong> 1.0.7 Stable</div>
+                                                    <div><strong style="color:#ffffff;" x-text="$store.app.t('about.ui_version')"></strong> 1.0.9 Stable</div>
                                                     <div><strong style="color:#ffffff;" x-text="$store.app.t('about.system')"></strong> Xenia Emulator</div>
                                                 </div>
 

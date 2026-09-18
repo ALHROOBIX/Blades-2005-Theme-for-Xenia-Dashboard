@@ -2,7 +2,16 @@
     $store.app.focusedCollection = 'aboutMenu';
     $store.app.focusedIndex = 0;
 ">
-    <div class="blade-dynamic-bg" style="background-image: url('assets/images/wallpapers/About.png'); position: absolute; top:0; left:0; width:100%; height:100%; z-index:-1;"></div>
+    <div
+        id="games-wallpaper"
+        x-data
+        :style="`background-image: url('${
+            $store.app.displaySettings?.aboutBg
+            ? 'file:///' + $store.app.displaySettings.aboutBg.replace(/\\/g, '/')
+            : 'assets/images/wallpapers/About.png'
+        }')`"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;">
+    </div>
     <div class="global-glass-bg" style="z-index:-1;"></div>
     <div class="nxe-header-panel">
         <div class="nxe-header-text">
