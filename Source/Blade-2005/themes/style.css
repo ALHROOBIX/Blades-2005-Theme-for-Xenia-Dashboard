@@ -251,6 +251,7 @@ body::after {
     left: calc(var(--idx) * 60px + 50px); 
     width: 160px; 
     right: auto;
+    
 }
 .blade-tab.stacked-right {
     right: calc((var(--total-tabs) - var(--idx) - 1) * 60px + 50px); 
@@ -274,29 +275,15 @@ body::after {
 @keyframes bladeSlide {
     0% {
         opacity: 0;
-        transform: perspective(900px) translate3d(-40px, 0, -22px) scaleX(0.6);
-        filter: blur(6px);
-    }
-    30% {
-        opacity: 1;
-        
-        transform: perspective(900px) translate3d(-16px, 0, -10px) scaleX(0.82);
-        filter: blur(0);
+        transform: translate3d(-16px, 0, 0) rotate(-0.5deg) scale(0.97);
     }
     60% {
         opacity: 1;
-        transform: perspective(900px) translate3d(6px, 0, 3px) scaleX(1.06);
-        filter: blur(0);
-    }
-    80% {
-        opacity: 1;
-        transform: perspective(900px) translate3d(-3px, 0, -2px) scaleX(0.98);
-        filter: blur(0);
+        transform: translate3d(2px, 0, 0) rotate(0.15deg) scale(1.005);
     }
     100% {
         opacity: 1;
-        transform: perspective(900px) translate3d(0, 0, 0) scaleX(1);
-        filter: blur(0);
+        transform: translate3d(0, 0, 0) rotate(0) scale(1);
     }
 }
 
